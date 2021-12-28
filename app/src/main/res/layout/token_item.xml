@@ -30,6 +30,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:text="Couleur du jeton :"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,6 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="Rouge"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintStart_toEndOf="@+id/colorTokenView"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -76,6 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nb jetons : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -84,6 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="20"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintStart_toEndOf="@+id/labelNumberToken"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -99,13 +103,15 @@
                         android:id="@+id/labelValueToken"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Valeur du jeton : " />
+                        android:text="Valeur du jeton : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
                         android:id="@+id/valueToken"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="20"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintStart_toEndOf="@+id/labelValueToken" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
