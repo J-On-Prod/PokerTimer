@@ -54,6 +54,10 @@ public class Token implements Serializable, Comparable<Token> {
         this.color = color;
     }
 
+    public int getTotalValue() {
+        return this.value * this.number;
+    }
+
     @Override
     public int compareTo(Token o) {
         return this.value - o.value;

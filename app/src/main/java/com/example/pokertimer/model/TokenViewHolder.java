@@ -33,6 +33,7 @@ public class TokenViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     @Override
     public void onClick(View v) {
+        // TODO : Configuration of token need
         this.getLayoutPosition();
     }
 }
