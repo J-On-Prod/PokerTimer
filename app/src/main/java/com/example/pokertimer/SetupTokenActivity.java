@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +13,7 @@ import android.widget.Button;
 import com.example.pokertimer.model.Game;
 import com.example.pokertimer.model.TokenAdapter;
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity {
+public class SetupTokenActivity extends AppCompatActivity {
 
     Game game;
     TokenAdapter tokenAdapter;
@@ -22,10 +21,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_setup_token);
 
         if (game == null) {
             game = new Game();
+        } else {
+            game = (Game) getIntent().getSerializableExtra("Game");
         }
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.listTokens);
@@ -36,16 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
         Button setupOptionButton = (Button) findViewById(R.id.setupOptionButton);
         setupOptionButton.setOnClickListener(v -> {
-            Bundle b = new Bundle();
-            b.putParcelable("Game", game);
             Intent intent = new Intent(getApplicationContext(), SetupOptionActivity.class);
-            intent.putExtra("BundleGame", b);
+            intent.putExtra("Game", game);
             startActivity(intent);
         });
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void createToken(View view) {
         game.addToken();
-        tokenAdapter.notifyItemChanged(this.game.getTokenList().size()-1);
+        tokenAdapter.notifyDataSetChanged();
     }
 }

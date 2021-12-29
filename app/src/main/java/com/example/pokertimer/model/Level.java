@@ -3,7 +3,9 @@ package com.example.pokertimer.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Level implements Parcelable {
+import java.io.Serializable;
+
+public class Level implements Serializable {
 
     private boolean breakGame;
     private int duration;
@@ -38,18 +40,6 @@ public class Level implements Parcelable {
         bigBlind = in.readInt();
     }
 
-    public static final Creator<Level> CREATOR = new Creator<Level>() {
-        @Override
-        public Level createFromParcel(Parcel in) {
-            return new Level(in);
-        }
-
-        @Override
-        public Level[] newArray(int size) {
-            return new Level[size];
-        }
-    };
-
     boolean getBreakGame() {
         return this.getBreakGame();
     }
@@ -82,16 +72,4 @@ public class Level implements Parcelable {
         this.bigBlind = bigBlind;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeByte((byte) (breakGame ? 1 : 0));
-        dest.writeInt(duration);
-        dest.writeInt(smallBlind);
-        dest.writeInt(bigBlind);
-    }
 }

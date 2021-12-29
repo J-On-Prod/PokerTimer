@@ -1,19 +1,19 @@
 package com.example.pokertimer.model;
 
 import android.graphics.Color;
-import android.os.Parcel;
-import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Game implements Parcelable {
+public class Game implements Serializable {
 
-    private ArrayList<Token> tokenList;
-    private ArrayList<Level> levelList;
-    private int nbPlayer = 4;
-    private int defaultDurationLevel = 10;
-    private int durationPlay = 240;
-    private int pauseEveryLevel = 5;
+    private final ArrayList<Token> tokenList;
+    private final ArrayList<Level> levelList;
+    private Integer nbPlayer = 4;
+    private Integer defaultDurationLevel = 10;
+    private Integer durationPlay = 240;
+    private Integer pauseEveryLevel = 5;
 
     public Game() {
         tokenList = new ArrayList<Token>();
@@ -26,33 +26,17 @@ public class Game implements Parcelable {
         levelList = new ArrayList<Level>();
     }
 
-    protected Game(Parcel in) {
-        tokenList = in.readArrayList(null);
-        levelList = in.readArrayList(null);
-        nbPlayer = in.readInt();
-        defaultDurationLevel = in.readInt();
-        durationPlay = in.readInt();
-        pauseEveryLevel = in.readInt();
-    }
-
-    public static final Creator<Game> CREATOR = new Creator<Game>() {
-        @Override
-        public Game createFromParcel(Parcel in) {
-            return new Game(in);
-        }
-
-        @Override
-        public Game[] newArray(int size) {
-            return new Game[size];
-        }
-    };
-
     public ArrayList<Token> getTokenList() {
         return tokenList;
     }
 
     public void addToken() {
         this.tokenList.add(new Token(1, 60, Color.GRAY));
+        this.sortTokens();
+    }
+
+    private void sortTokens() {
+        Collections.sort(this.tokenList);
     }
 
     public void deleteToken(int position) { this.tokenList.remove(position); }
@@ -65,9 +49,9 @@ public class Game implements Parcelable {
         this.tokenList.set(position, token);
     }
 
-    public int getNbPlayer() {
-        return nbPlayer;
-    }
+    public int getNbPlayer() { return nbPlayer; }
+
+    public String getNbPlayerToString() { return nbPlayer.toString(); }
 
     public void setNbPlayer(int nbPlayer) {
         this.nbPlayer = nbPlayer;
@@ -75,6 +59,10 @@ public class Game implements Parcelable {
 
     public int getDurationPlay() {
         return durationPlay;
+    }
+
+    public String getDurationPlayToString() {
+        return durationPlay.toString();
     }
 
     public void setDurationPlay(int durationPlay) {
@@ -85,6 +73,10 @@ public class Game implements Parcelable {
         return defaultDurationLevel;
     }
 
+    public String getDefaultDurationLevelToString() {
+        return defaultDurationLevel.toString();
+    }
+
     public void setDefaultDurationLevel(int defaultDurationLevel) {
         this.defaultDurationLevel = defaultDurationLevel;
     }
@@ -93,22 +85,10 @@ public class Game implements Parcelable {
         return pauseEveryLevel;
     }
 
+    public String getPauseEveryLevelToString() { return pauseEveryLevel.toString(); }
+
     public void setPauseEveryLevel(int pauseEveryLevel) {
         this.pauseEveryLevel = pauseEveryLevel;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(tokenList);
-        dest.writeList(levelList);
-        dest.writeInt(nbPlayer);
-        dest.writeInt(defaultDurationLevel);
-        dest.writeInt(durationPlay);
-        dest.writeInt(pauseEveryLevel);
-    }
 }

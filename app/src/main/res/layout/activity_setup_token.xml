@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SetupTokenActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -55,11 +55,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Ajouter"
             android:clickable="true"
-            android:onClick="createToken"
-            app:layout_constraintStart_toStartOf="parent"
             android:focusable="true"
+            android:onClick="createToken"
+            android:text="Ajouter +"
+            app:layout_constraintStart_toStartOf="parent"
             tools:ignore="OnClick" />
 
         <Button
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Suivant"
+            android:text="Paramétrage ►"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

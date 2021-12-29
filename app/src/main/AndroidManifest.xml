@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PokerTimer">
         <activity
+            android:name=".SetupLevelActivity"
+            android:exported="false" />
+        <activity
             android:name=".SetupOptionActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SetupTokenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
