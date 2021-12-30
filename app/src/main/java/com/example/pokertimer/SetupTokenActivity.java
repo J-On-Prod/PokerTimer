@@ -39,11 +39,6 @@ public class SetupTokenActivity extends AppCompatActivity {
     private void getIntentData() {
         Intent i = getIntent();
         game = (Game) i.getSerializableExtra("Game");
-        int position = i.getIntExtra("Position", -1);
-        if (position > -1) {
-            Token token = (Token) i.getSerializableExtra("Token");
-            game.setToken(position, token);
-        }
     }
 
     private void createListToken() {

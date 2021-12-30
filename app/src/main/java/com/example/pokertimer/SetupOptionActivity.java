@@ -11,8 +11,6 @@ import android.widget.Switch;
 
 import com.example.pokertimer.model.Game;
 
-import java.util.Collections;
-
 public class SetupOptionActivity extends AppCompatActivity {
 
     Game game;
@@ -75,30 +73,45 @@ public class SetupOptionActivity extends AppCompatActivity {
     private void createSwitchCalulation() {
         switchCalculation = (Switch) findViewById(R.id.switchCalculation);
         switchCalculation.setChecked(game.getCalculateGame());
-        switchCalculation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean checked = ((Switch) v).isChecked();
-                game.setCalculateGame(checked);
-            }
+        switchCalculation.setOnClickListener(v -> {
+            boolean checked = ((Switch) v).isChecked();
+            game.setCalculateGame(checked);
         });
+    }
+
+    private void setAllValueGame() {
+        int nbPlayerEdit = Integer.parseInt(editNbPlayer.getText().toString());
+        game.setNbPlayer(nbPlayerEdit);
+        int durationGameEdit = Integer.parseInt(editDurationGame.getText().toString());
+        game.setDurationGame(durationGameEdit);
+        int durationLevelEdit = Integer.parseInt(editDurationLevel.getText().toString());
+        game.setDefaultDurationLevel(durationLevelEdit);
+        int smallBlindEdit = Integer.parseInt(editSmallBlind.getText().toString());
+        game.setStartSmallBlind(smallBlindEdit);
+        int pauseEdit = Integer.parseInt(editLevelBtwPauses.getText().toString());
+        game.setPauseEveryLevel(pauseEdit);
+        int percentageBankEdit = Integer.parseInt(editPercentageBankToken.getText().toString());
+        game.setPercentageBankToken(percentageBankEdit);
+    }
+
+    private void passIntentGame(Class<?> classSelected) {
+        setAllValueGame();
+        Intent intent = new Intent(getApplicationContext(), classSelected);
+        intent.putExtra("Game", game);
+        startActivity(intent);
     }
 
     private void createTokenButton() {
         Button setupTokenButton = (Button) findViewById(R.id.buttonBackToken);
         setupTokenButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), SetupTokenActivity.class);
-            intent.putExtra("Game", game);
-            startActivity(intent);
+            passIntentGame(SetupTokenActivity.class);
         });
     }
 
     private void createLevelButton() {
         Button setupLevelButton = (Button) findViewById(R.id.buttonNextLevel);
         setupLevelButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), SetupLevelActivity.class);
-            intent.putExtra("Game", game);
-            startActivity(intent);
+            passIntentGame(SetupLevelActivity.class);
         });
     }
 

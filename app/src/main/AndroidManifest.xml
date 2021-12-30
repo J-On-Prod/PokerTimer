@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PokerTimer">
         <activity
+            android:name=".InGameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PrepareGameActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChangeTokenActivity"
             android:exported="false" />
         <activity

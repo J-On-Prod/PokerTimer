@@ -3,16 +3,17 @@ package com.example.pokertimer.model;
 import android.graphics.Color;
 
 import java.io.Serializable;
+import java.lang.invoke.VolatileCallSite;
 
 public class Token implements Serializable, Comparable<Token> {
 
     private Integer value = 1;
     private Integer number = 1;
-    private Integer color = Color.DKGRAY;
+    private ColorToken color = ColorToken.GREY;
 
     public Token() {}
 
-    public Token(int value, int number, int color) {
+    public Token(int value, int number, ColorToken color) {
         this.value = value;
         this.number = number;
         this.color = color;
@@ -42,7 +43,7 @@ public class Token implements Serializable, Comparable<Token> {
         this.number = number;
     }
 
-    public int getColor() {
+    public ColorToken getColor() {
         return color;
     }
 
@@ -50,7 +51,7 @@ public class Token implements Serializable, Comparable<Token> {
         return color.toString();
     }
 
-    public void setColor(int color) {
+    public void setColor(ColorToken color) {
         this.color = color;
     }
 

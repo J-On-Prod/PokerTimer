@@ -2,8 +2,6 @@ package com.example.pokertimer.model;
 
 import static java.lang.Math.round;
 
-import android.graphics.Color;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +13,7 @@ public class Game implements Serializable {
     private ArrayList<Level> levelList;
     private Integer nbPlayer = 4;
     private Integer defaultDurationLevel = 10;
-    private Integer durationPlay = 240;
+    private Integer durationGame = 240;
     private Integer pauseEveryLevel = 5;
     private Integer percentageBankToken = 15;
     private Integer startSmallBlind = -1;
@@ -44,11 +42,11 @@ public class Game implements Serializable {
 
     public Game() {
         tokenList = new ArrayList<Token>();
-        tokenList.add(new Token(1, 120, Color.LTGRAY));
-        tokenList.add(new Token(5, 60, Color.BLUE));
-        tokenList.add(new Token(25, 60, Color.RED));
-        tokenList.add(new Token(100, 60, Color.GREEN));
-        tokenList.add(new Token(200, 60, Color.DKGRAY));
+        tokenList.add(new Token(1, 120, ColorToken.WHITE));
+        tokenList.add(new Token(5, 60, ColorToken.BLUE));
+        tokenList.add(new Token(25, 60, ColorToken.RED));
+        tokenList.add(new Token(100, 60, ColorToken.GREEN));
+        tokenList.add(new Token(200, 60, ColorToken.BLACK));
 
         levelList = new ArrayList<Level>();
     }
@@ -60,7 +58,7 @@ public class Game implements Serializable {
     }
 
     public void addToken() {
-        this.tokenList.add(new Token(1, 60, Color.GRAY));
+        this.tokenList.add(new Token(1, 60, ColorToken.GREY));
         this.sortTokens();
     }
 
@@ -76,6 +74,15 @@ public class Game implements Serializable {
 
     public void setToken(int position, Token token) {
         this.tokenList.set(position, token);
+    }
+
+    public boolean isColorExist(ColorToken colorToken) {
+        for (Token token : tokenList) {
+            if (token.getColor() == colorToken) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /* LEVELS */
@@ -97,11 +104,11 @@ public class Game implements Serializable {
     }
 
     private int getRealTimePlay() {
-        return getRatioPlay() * this.getDurationPlay();
+        return getRatioPlay() * this.getDurationGame();
     }
 
     private int getTotalOfLevelPlay() {
-        return getRatioPlay() * (this.durationPlay / this.defaultDurationLevel);
+        return getRatioPlay() * (this.durationGame / this.defaultDurationLevel);
     }
 
     private double getNbSteps() {
@@ -199,16 +206,16 @@ public class Game implements Serializable {
         this.startSmallBlind = startSmallBlind;
     }
 
-    public int getDurationPlay() {
-        return durationPlay;
+    public int getDurationGame() {
+        return durationGame;
     }
 
     public String getDurationPlayToString() {
-        return durationPlay.toString();
+        return durationGame.toString();
     }
 
-    public void setDurationPlay(int durationPlay) {
-        this.durationPlay = durationPlay;
+    public void setDurationGame(int durationGame) {
+        this.durationGame = durationGame;
     }
 
     public int getDefaultDurationLevel() {
@@ -229,6 +236,10 @@ public class Game implements Serializable {
 
     public Integer getPercentageBankToken() {
         return percentageBankToken;
+    }
+
+    public void setPercentageBankToken(Integer percentageBankToken) {
+        this.percentageBankToken = percentageBankToken;
     }
 
     public void setPauseEveryLevel(Integer pauseEveryLevel) {
