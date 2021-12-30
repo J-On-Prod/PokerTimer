@@ -19,11 +19,18 @@ public class SetupLevelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_level);
 
-        boolean calculateGame = true;
+        getIntentData();
+
+        createLevelList();
+    }
+
+    private void getIntentData() {
         game = (Game) getIntent().getSerializableExtra("Game");
         game.calculateGame();
         game.setCalculateGame(false);
+    }
 
+    private void createLevelList() {
         RecyclerView recyclerView = findViewById(R.id.recyclerLevel);
 
         levelAdapter = new LevelAdapter(game.getLevelList());

@@ -104,11 +104,18 @@ public class Game implements Serializable {
         return getRatioPlay() * (this.durationPlay / this.defaultDurationLevel);
     }
 
-    private void generateLevels() {
-        double bigBlind = startSmallBlind * 2.0;
-        double nbSteps = 1.0 / getTotalOfLevelPlay();
-        double coefLevel = Math.pow(getTenthOfCave() / bigBlind, nbSteps);
+    private double getNbSteps() {
+        return 1.0 / getTotalOfLevelPlay();
+    }
 
+    private double getCoefLevel() {
+        double bigBlind = startSmallBlind * 2.0;
+        double nbSteps = getNbSteps();
+        return Math.pow(getTenthOfCave() / bigBlind, nbSteps);
+    }
+
+    private void generateLevels() {
+        double coefLevel =  getCoefLevel();
         double increment = startSmallBlind.doubleValue();
         int nbLvl = 0;
         levelList = new ArrayList<Level>();
@@ -122,6 +129,13 @@ public class Game implements Serializable {
             increment *= coefLevel;
             nbLvl++;
         }
+        calculateTotalCave();
+    }
+
+    private void calculateTotalCave() {
+        if (totalPerPlayer >= 0) {
+            this.totalCave = totalPerPlayer * nbPlayer;
+        }
     }
 
     private void splitTokensPlayers() {
@@ -134,7 +148,7 @@ public class Game implements Serializable {
             Token newToken = new Token(nbTokenPerPlayer, token.getValue(), token.getColor());
             tokensPerPlayer.add(newToken);
         }
-        this.totalCave = totalPerPlayer * nbPlayer;
+        calculateTotalCave();
     }
 
     public void calculateGame() {

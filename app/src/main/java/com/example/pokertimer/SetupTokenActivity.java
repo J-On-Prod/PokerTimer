@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.pokertimer.model.Game;
+import com.example.pokertimer.model.Token;
 import com.example.pokertimer.model.TokenAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SetupTokenActivity extends AppCompatActivity {
 
@@ -26,15 +28,37 @@ public class SetupTokenActivity extends AppCompatActivity {
         if (game == null) {
             game = new Game();
         } else {
-            game = (Game) getIntent().getSerializableExtra("Game");
+            getIntentData();
         }
 
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.listTokens);
+        createListToken();
+        createAddButton();
+        createSetupGameButton();
+    }
 
+    private void getIntentData() {
+        Intent i = getIntent();
+        game = (Game) i.getSerializableExtra("Game");
+        int position = i.getIntExtra("Position", -1);
+        if (position > -1) {
+            Token token = (Token) i.getSerializableExtra("Token");
+            game.setToken(position, token);
+        }
+    }
+
+    private void createListToken() {
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.listTokens);
         this.tokenAdapter = new TokenAdapter(game.getTokenList());
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(tokenAdapter);
+    }
 
+    private void createAddButton() {
+        FloatingActionButton addTokenButton = (FloatingActionButton) findViewById(R.id.addTokenButton);
+        addTokenButton.setOnClickListener(this::createToken);
+    }
+
+    private void createSetupGameButton() {
         Button setupOptionButton = (Button) findViewById(R.id.setupOptionButton);
         setupOptionButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), SetupOptionActivity.class);

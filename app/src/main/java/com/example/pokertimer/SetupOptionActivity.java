@@ -29,26 +29,51 @@ public class SetupOptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_option);
 
-        game = (Game) getIntent().getSerializableExtra("Game");
-        if (game.getStartSmallBlind() == -1) {
-            game.generateSmallBlind();
-        }
+        getIntentData();
 
+        createNbPlayer();
+        createDurationGame();
+        createDurationLevel();
+        createSmallBlind();
+        createLevelBetweenPauses();
+        createPercentageBankToken();
+        createSwitchCalulation();
+        createTokenButton();
+        createLevelButton();
+    }
+
+    private void createNbPlayer() {
         editNbPlayer = (EditText) findViewById(R.id.editNbPlayer);
-        editDurationGame = (EditText) findViewById(R.id.editDurationGame);
-        editDurationLevel = (EditText) findViewById(R.id.editDurationLevel);
-        editSmallBlind = (EditText) findViewById(R.id.editSmallBlind);
-        editLevelBtwPauses = (EditText) findViewById(R.id.editDefaultPauses);
-        editPercentageBankToken = (EditText) findViewById(R.id.editPercentageBank);
-        switchCalculation = (Switch) findViewById(R.id.switchCalculation);
-
         editNbPlayer.setText(game.getNbPlayerToString());
-        editDurationGame.setText(game.getDurationPlayToString());
-        editDurationLevel.setText(game.getDefaultDurationLevelToString());
-        editSmallBlind.setText(game.getStartSmallBlindToString());
-        editLevelBtwPauses.setText(game.getPauseEveryLevelToString());
-        editPercentageBankToken.setText(game.getPercentageBankToken());
+    }
 
+    private void createDurationGame() {
+        editDurationGame = (EditText) findViewById(R.id.editDurationGame);
+        editDurationGame.setText(game.getDurationPlayToString());
+    }
+
+    private void createDurationLevel() {
+        editDurationLevel = (EditText) findViewById(R.id.editDurationLevel);
+        editDurationLevel.setText(game.getDefaultDurationLevelToString());
+    }
+
+    private void createSmallBlind() {
+        editSmallBlind = (EditText) findViewById(R.id.editSmallBlind);
+        editSmallBlind.setText(game.getStartSmallBlindToString());
+    }
+
+    private void createLevelBetweenPauses() {
+        editLevelBtwPauses = (EditText) findViewById(R.id.editDefaultPauses);
+        editLevelBtwPauses.setText(game.getPauseEveryLevelToString());
+    }
+
+    private void createPercentageBankToken() {
+        editPercentageBankToken = (EditText) findViewById(R.id.editPercentageBank);
+        editPercentageBankToken.setText(game.getPercentageBankToken());
+    }
+
+    private void createSwitchCalulation() {
+        switchCalculation = (Switch) findViewById(R.id.switchCalculation);
         switchCalculation.setChecked(game.getCalculateGame());
         switchCalculation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,19 +82,30 @@ public class SetupOptionActivity extends AppCompatActivity {
                 game.setCalculateGame(checked);
             }
         });
+    }
 
+    private void createTokenButton() {
         Button setupTokenButton = (Button) findViewById(R.id.buttonBackToken);
         setupTokenButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), SetupTokenActivity.class);
             intent.putExtra("Game", game);
             startActivity(intent);
         });
+    }
 
+    private void createLevelButton() {
         Button setupLevelButton = (Button) findViewById(R.id.buttonNextLevel);
         setupLevelButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), SetupLevelActivity.class);
             intent.putExtra("Game", game);
             startActivity(intent);
         });
+    }
+
+    private void getIntentData() {
+        game = (Game) getIntent().getSerializableExtra("Game");
+        if (game.getStartSmallBlind() == -1) {
+            game.generateSmallBlind();
+        }
     }
 }
