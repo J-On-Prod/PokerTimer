@@ -72,10 +72,6 @@ public class Level implements Serializable {
         this.durationIncrement = durationIncrement;
     }
 
-    public Integer getSmallBlind() {
-        return smallBlind;
-    }
-
     public String  getSmallBlindToString() {
         return smallBlind.toString();
     }
@@ -84,16 +80,16 @@ public class Level implements Serializable {
         this.smallBlind = smallBlind;
     }
 
-    public Integer getBigBlind() {
-        return bigBlind;
-    }
-
     public String getBigBlindToString() {
         return bigBlind.toString();
     }
 
     public void setBigBlind(int bigBlind) {
         this.bigBlind = bigBlind;
+    }
+
+    public double ratioLeftTime(long timeInMilliseconds) {
+        return (timeInMilliseconds/1000) / duration;
     }
 
 }

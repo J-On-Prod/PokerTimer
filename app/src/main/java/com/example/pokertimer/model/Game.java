@@ -5,10 +5,11 @@ import static java.lang.Math.round;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class Game implements Serializable {
 
-    private final ArrayList<Token> tokenList;
+    private ArrayList<Token> tokenList;
     private ArrayList<Token> tokensPerPlayer;
     private ArrayList<Level> levelList;
     private Integer nbPlayer = 4;
@@ -22,6 +23,8 @@ public class Game implements Serializable {
     private Integer totalValuePerPlayer = -1;
     private Integer totalNbPerPlayer = -1;
     private boolean calculateGame = true;
+
+    private HashMap<Integer, Integer> tmpTime = new HashMap<Integer, Integer>();
 
     private static int roundModulo(double val, int modulo) {
         int difference = (int) (val % modulo);
@@ -170,6 +173,7 @@ public class Game implements Serializable {
             this.generateLevels();
             this.splitTokensPlayers();
         }
+        tmpTime = new HashMap<Integer, Integer>();
     }
 
     public ArrayList<Level> getLevelList() {
@@ -178,10 +182,6 @@ public class Game implements Serializable {
 
     public Level getLevel(int position) {
         return levelList.get(position);
-    }
-
-    public void setLevel(int position, Level newLevel) {
-        levelList.set(position, newLevel);
     }
 
     public String getNbPlayerToString() { return nbPlayer.toString(); }
@@ -259,5 +259,17 @@ public class Game implements Serializable {
 
     public void setCalculateGame(boolean calculateGame) {
         this.calculateGame = calculateGame;
+    }
+
+    public int getTimeLeftGame(int positionLevel) {
+        if (tmpTime.containsKey(positionLevel)) {
+            return tmpTime.get(positionLevel);
+        }
+        int res = 0;
+        for (int i = positionLevel; i < levelList.size(); i++) {
+            res += levelList.get(i).getDuration();
+        }
+        tmpTime.put(positionLevel, res);
+        return res;
     }
 }
