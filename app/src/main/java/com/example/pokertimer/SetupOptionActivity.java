@@ -103,16 +103,12 @@ public class SetupOptionActivity extends AppCompatActivity {
 
     private void createTokenButton() {
         Button setupTokenButton = (Button) findViewById(R.id.buttonBackToken);
-        setupTokenButton.setOnClickListener(v -> {
-            passIntentGame(SetupTokenActivity.class);
-        });
+        setupTokenButton.setOnClickListener(v -> passIntentGame(SetupTokenActivity.class));
     }
 
     private void createLevelButton() {
         Button setupLevelButton = (Button) findViewById(R.id.buttonNextLevel);
-        setupLevelButton.setOnClickListener(v -> {
-            passIntentGame(SetupLevelActivity.class);
-        });
+        setupLevelButton.setOnClickListener(v -> passIntentGame(SetupLevelActivity.class));
     }
 
     private void getIntentData() {

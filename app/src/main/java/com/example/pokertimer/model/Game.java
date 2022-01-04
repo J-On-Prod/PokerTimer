@@ -19,7 +19,8 @@ public class Game implements Serializable {
     private Integer startSmallBlind = -1;
     private Integer totalToken = -1;
     private Integer totalCave = -1;
-    private Integer totalPerPlayer = -1;
+    private Integer totalValuePerPlayer = -1;
+    private Integer totalNbPerPlayer = -1;
     private boolean calculateGame = true;
 
     private static int roundModulo(double val, int modulo) {
@@ -74,6 +75,10 @@ public class Game implements Serializable {
 
     public void setToken(int position, Token token) {
         this.tokenList.set(position, token);
+    }
+
+    public ArrayList<Token> getTokensPerPlayer() {
+        return tokensPerPlayer;
     }
 
     public boolean isColorExist(ColorToken colorToken) {
@@ -140,18 +145,20 @@ public class Game implements Serializable {
     }
 
     private void calculateTotalCave() {
-        if (totalPerPlayer >= 0) {
-            this.totalCave = totalPerPlayer * nbPlayer;
+        if (totalValuePerPlayer >= 0) {
+            this.totalCave = totalValuePerPlayer * nbPlayer;
         }
     }
 
     private void splitTokensPlayers() {
         this.calculateTotalValueToken();
         tokensPerPlayer = new ArrayList<Token>();
-        totalPerPlayer = 0;
+        totalValuePerPlayer = 0;
+        totalNbPerPlayer = 0;
         for (Token token : tokenList) {
             int nbTokenPerPlayer = (int) Math.floor(token.getNumber() * (1 - percentageBankToken) * 0.01);
-            totalPerPlayer += nbTokenPerPlayer * token.getValue();
+            totalNbPerPlayer += nbTokenPerPlayer;
+            totalValuePerPlayer += nbTokenPerPlayer * token.getValue();
             Token newToken = new Token(nbTokenPerPlayer, token.getValue(), token.getColor());
             tokensPerPlayer.add(newToken);
         }
@@ -177,16 +184,18 @@ public class Game implements Serializable {
         levelList.set(position, newLevel);
     }
 
-    public int getNbPlayer() { return nbPlayer; }
-
     public String getNbPlayerToString() { return nbPlayer.toString(); }
 
     public void setNbPlayer(int nbPlayer) {
         this.nbPlayer = nbPlayer;
     }
 
-    public Integer getTotalPerPlayer() {
-        return totalPerPlayer;
+    public Integer getTotalNbPerPlayer() {
+        return totalNbPerPlayer;
+    }
+
+    public Integer getTotalValuePerPlayer() {
+        return totalValuePerPlayer;
     }
 
     public Integer getStartSmallBlind() {
@@ -218,10 +227,6 @@ public class Game implements Serializable {
         this.durationGame = durationGame;
     }
 
-    public int getDefaultDurationLevel() {
-        return defaultDurationLevel;
-    }
-
     public String getDefaultDurationLevelToString() {
         return defaultDurationLevel.toString();
     }
@@ -240,10 +245,6 @@ public class Game implements Serializable {
 
     public void setPercentageBankToken(Integer percentageBankToken) {
         this.percentageBankToken = percentageBankToken;
-    }
-
-    public void setPauseEveryLevel(Integer pauseEveryLevel) {
-        this.pauseEveryLevel = pauseEveryLevel;
     }
 
     public String getPauseEveryLevelToString() { return pauseEveryLevel.toString(); }
