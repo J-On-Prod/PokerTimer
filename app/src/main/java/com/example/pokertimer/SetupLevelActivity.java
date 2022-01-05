@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.example.pokertimer.model.Game;
 import com.example.pokertimer.model.LevelAdapter;
@@ -22,6 +24,8 @@ public class SetupLevelActivity extends AppCompatActivity {
         getIntentData();
 
         createLevelList();
+        createButtonBackOptions();
+        createButtonNextLaunchGame();
     }
 
     private void getIntentData() {
@@ -36,5 +40,21 @@ public class SetupLevelActivity extends AppCompatActivity {
         levelAdapter = new LevelAdapter(game.getLevelList());
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(levelAdapter);
+    }
+
+    private void passIntentGame(Class<?> classSelected) {
+        Intent intent = new Intent(getApplicationContext(), classSelected);
+        intent.putExtra("Game", game);
+        startActivity(intent);
+    }
+
+    private void createButtonBackOptions() {
+        Button buttonBackOption = findViewById(R.id.buttonBackOption);
+        buttonBackOption.setOnClickListener(v -> passIntentGame(SetupOptionActivity.class));
+    }
+
+    private void createButtonNextLaunchGame() {
+        Button buttonNextLaunch = findViewById(R.id.buttonNextLaunch);
+        buttonNextLaunch.setOnClickListener(v -> passIntentGame(PrepareGameActivity.class));
     }
 }

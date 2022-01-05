@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonBackOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="◄ Paramétrage"
@@ -54,7 +54,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonNextLaunch"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -2,7 +2,9 @@ package com.example.pokertimer.model;
 
 import android.graphics.Color;
 
-public class ColorToken {
+import java.io.Serializable;
+
+public class ColorToken implements Serializable {
 
     public static ColorToken WHITE = new ColorToken(Color.LTGRAY, "BLANC");
     public static ColorToken BLUE = new ColorToken(Color.BLUE, "BLEU");

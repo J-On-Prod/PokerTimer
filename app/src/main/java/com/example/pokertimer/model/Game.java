@@ -190,12 +190,12 @@ public class Game implements Serializable {
         this.nbPlayer = nbPlayer;
     }
 
-    public Integer getTotalNbPerPlayer() {
-        return totalNbPerPlayer;
+    public String getTotalNbPerPlayerToString() {
+        return totalNbPerPlayer.toString();
     }
 
-    public Integer getTotalValuePerPlayer() {
-        return totalValuePerPlayer;
+    public String getTotalValuePerPlayerToString() {
+        return totalValuePerPlayer.toString();
     }
 
     public Integer getStartSmallBlind() {
@@ -239,8 +239,8 @@ public class Game implements Serializable {
         return pauseEveryLevel;
     }
 
-    public Integer getPercentageBankToken() {
-        return percentageBankToken;
+    public String getPercentageBankTokenToString() {
+        return percentageBankToken.toString();
     }
 
     public void setPercentageBankToken(Integer percentageBankToken) {

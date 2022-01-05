@@ -67,7 +67,7 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private void createButtonSkipToNextLevel() {
-        Button nextButton = findViewById(R.id.buttonNextLevel);
+        Button nextButton = findViewById(R.id.buttonIncrementLevel);
         nextButton.setOnClickListener(v -> touchChangeLevel());
     }
 

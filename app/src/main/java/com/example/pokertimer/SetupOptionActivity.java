@@ -67,7 +67,7 @@ public class SetupOptionActivity extends AppCompatActivity {
 
     private void createPercentageBankToken() {
         editPercentageBankToken = (EditText) findViewById(R.id.editPercentageBank);
-        editPercentageBankToken.setText(game.getPercentageBankToken());
+        editPercentageBankToken.setText(game.getPercentageBankTokenToString());
     }
 
     private void createSwitchCalulation() {

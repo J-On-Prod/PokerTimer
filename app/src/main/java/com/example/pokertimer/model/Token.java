@@ -48,7 +48,7 @@ public class Token implements Serializable, Comparable<Token> {
     }
 
     public String getColorToString() {
-        return color.toString();
+        return color.getName();
     }
 
     public void setColor(ColorToken color) {

@@ -28,7 +28,7 @@ public class TokenViewHolder extends RecyclerView.ViewHolder implements View.OnC
         valueToken.setText(token.getValueToString());
         numberToken.setText(token.getNumberToString());
         colorToken.setText(token.getColorToString());
-        colorTokenView.setBackgroundColor(token.getColor());
+        colorTokenView.setBackgroundColor(token.getColor().getColorValue());
     }
 
     @Override

@@ -45,9 +45,9 @@ public class PrepareGameActivity extends AppCompatActivity {
 
     private void createSetTotalTokenPerPlayer() {
         TextView nbTokenPerPlayer = findViewById(R.id.textNbTokenPerPlayer);
-        nbTokenPerPlayer.setText(game.getTotalNbPerPlayer());
+        nbTokenPerPlayer.setText(game.getTotalNbPerPlayerToString());
         TextView valueTokenPerPlayer = findViewById(R.id.textValueTokenPerPlayer);
-        valueTokenPerPlayer.setText(game.getTotalValuePerPlayer());
+        valueTokenPerPlayer.setText(game.getTotalValuePerPlayerToString());
     }
 
     private void touchStartGameButton() {
