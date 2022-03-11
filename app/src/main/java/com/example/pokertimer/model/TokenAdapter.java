@@ -14,9 +14,11 @@ import java.util.List;
 public class TokenAdapter extends RecyclerView.Adapter<TokenViewHolder> {
 
     List<Token> tokens;
+    private OnTokenListener onTokenListener;
 
-    public TokenAdapter(List<Token> tokens) {
+    public TokenAdapter(List<Token> tokens, OnTokenListener onTokenListener) {
         this.tokens = tokens;
+        this.onTokenListener = onTokenListener;
     }
 
     @NonNull
@@ -24,7 +26,11 @@ public class TokenAdapter extends RecyclerView.Adapter<TokenViewHolder> {
     public TokenViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.token_item, parent, false);
-        return new TokenViewHolder(view);
+        return new TokenViewHolder(view, this.onTokenListener);
+    }
+
+    public Token get(int position) {
+        return this.tokens.get(position);
     }
 
     @Override
@@ -35,5 +41,9 @@ public class TokenAdapter extends RecyclerView.Adapter<TokenViewHolder> {
     @Override
     public int getItemCount() {
         return tokens.size();
+    }
+
+    public interface OnTokenListener {
+        void onTokenClick(int position);
     }
 }

@@ -2,6 +2,7 @@ package com.example.pokertimer.model;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,14 +15,18 @@ public class TokenViewHolder extends RecyclerView.ViewHolder implements View.OnC
     private TextView numberToken;
     private TextView colorToken;
     private View colorTokenView;
+    TokenAdapter.OnTokenListener onTokenListener;
 
-    public TokenViewHolder(@NonNull View itemView) {
+    public TokenViewHolder(@NonNull View itemView, TokenAdapter.OnTokenListener onTokenListener) {
         super(itemView);
 
         valueToken = itemView.findViewById(R.id.valueToken);
         numberToken = itemView.findViewById(R.id.numberToken);
         colorToken = itemView.findViewById(R.id.colorToken);
         colorTokenView = itemView.findViewById(R.id.colorTokenView);
+        this.onTokenListener = onTokenListener;
+
+        itemView.setOnClickListener(this);
     }
 
     void display(Token token) {
@@ -33,7 +38,6 @@ public class TokenViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     @Override
     public void onClick(View v) {
-        // TODO : Configuration of token need
-        this.getLayoutPosition();
+        onTokenListener.onTokenClick(getAdapterPosition());
     }
 }

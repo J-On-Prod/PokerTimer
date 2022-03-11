@@ -7,15 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.pokertimer.model.Game;
 import com.example.pokertimer.model.Token;
 import com.example.pokertimer.model.TokenAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class SetupTokenActivity extends AppCompatActivity {
+public class SetupTokenActivity extends AppCompatActivity implements TokenAdapter.OnTokenListener {
 
     Game game;
     TokenAdapter tokenAdapter;
@@ -43,7 +45,7 @@ public class SetupTokenActivity extends AppCompatActivity {
 
     private void createListToken() {
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.listTokens);
-        this.tokenAdapter = new TokenAdapter(game.getTokenList());
+        this.tokenAdapter = new TokenAdapter(game.getTokenList(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(tokenAdapter);
     }
@@ -66,5 +68,13 @@ public class SetupTokenActivity extends AppCompatActivity {
     public void createToken(View view) {
         game.addToken();
         tokenAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onTokenClick(int position) {
+        Intent intent = new Intent(getApplicationContext(), ChangeTokenActivity.class);
+        intent.putExtra("Game", game);
+        intent.putExtra("Position", position);
+        startActivity(intent);
     }
 }

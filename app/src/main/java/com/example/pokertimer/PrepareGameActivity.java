@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.pokertimer.model.Game;
 import com.example.pokertimer.model.TokenAdapter;
 
-public class PrepareGameActivity extends AppCompatActivity {
+public class PrepareGameActivity extends AppCompatActivity implements TokenAdapter.OnTokenListener {
 
     private Game game;
 
@@ -38,7 +38,7 @@ public class PrepareGameActivity extends AppCompatActivity {
 
     private void createRecyclerTokenPerPlayer() {
         RecyclerView recyclerView = findViewById(R.id.recyclerTokenPerPlayer);
-        TokenAdapter tokenAdapter = new TokenAdapter(game.getTokensPerPlayer());
+        TokenAdapter tokenAdapter = new TokenAdapter(game.getTokensPerPlayer(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(tokenAdapter);
     }
@@ -56,4 +56,8 @@ public class PrepareGameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onTokenClick(int position) {
+
+    }
 }

@@ -36,9 +36,9 @@ public class ChangeTokenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_change_token);
 
         getIntentData();
-        createColorTokenList();
+        //createColorTokenList();
 
-        createSpinner();
+        //createSpinner();
         createEditValue();
         createEditNumberToken();
         createBackTokenButton();
@@ -94,8 +94,8 @@ public class ChangeTokenActivity extends AppCompatActivity {
     }
 
     private void setAllValueOnToken() {
-        ColorToken colorToken = colorTokensList.get(spinner.getBaseline());
-        token.setColor(colorToken);
+        // ColorToken colorToken = colorTokensList.get(spinner.getBaseline());
+        // token.setColor(colorToken);
         int val = Integer.parseInt(editValue.getText().toString());
         token.setValue(val);
         int nbToken = Integer.parseInt(editNumberToken.getText().toString());
@@ -103,7 +103,7 @@ public class ChangeTokenActivity extends AppCompatActivity {
     }
 
     private void createValidTokenButton() {
-        Button b = findViewById(R.id.backTokenButton);
+        Button b = findViewById(R.id.validTokenButton);
         b.setOnClickListener(v -> {
             setAllValueOnToken();
             game.setToken(position, token);
