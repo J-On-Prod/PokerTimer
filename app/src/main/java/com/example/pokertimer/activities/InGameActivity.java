@@ -1,4 +1,4 @@
-package com.example.pokertimer;
+package com.example.pokertimer.activities;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.pokertimer.R;
 import com.example.pokertimer.model.Game;
 import com.example.pokertimer.model.Level;
 

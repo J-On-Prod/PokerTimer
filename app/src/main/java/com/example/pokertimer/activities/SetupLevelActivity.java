@@ -1,4 +1,4 @@
-package com.example.pokertimer;
+package com.example.pokertimer.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.pokertimer.R;
 import com.example.pokertimer.model.Game;
 import com.example.pokertimer.model.LevelAdapter;
 

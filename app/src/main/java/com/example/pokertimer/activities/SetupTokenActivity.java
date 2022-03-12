@@ -1,19 +1,19 @@
-package com.example.pokertimer;
+package com.example.pokertimer.activities;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
+import com.example.pokertimer.R;
+import com.example.pokertimer.activities.ChangeTokenActivity;
+import com.example.pokertimer.activities.SetupOptionActivity;
 import com.example.pokertimer.model.Game;
-import com.example.pokertimer.model.Token;
 import com.example.pokertimer.model.TokenAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -27,7 +27,7 @@ public class SetupTokenActivity extends AppCompatActivity implements TokenAdapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_token);
 
-        if (game == null) {
+        if (!gameIntentExist()) {
             game = new Game();
         } else {
             getIntentData();
@@ -38,9 +38,15 @@ public class SetupTokenActivity extends AppCompatActivity implements TokenAdapte
         createSetupGameButton();
     }
 
+    private Boolean gameIntentExist() {
+        Bundle extras = getIntent().getExtras();
+        return extras != null && extras.containsKey("Game");
+    }
+
     private void getIntentData() {
         Intent i = getIntent();
         game = (Game) i.getSerializableExtra("Game");
+
     }
 
     private void createListToken() {

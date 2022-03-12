@@ -10,22 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PokerTimer">
         <activity
-            android:name=".InGameActivity"
+            android:name=".activities.InGameActivity"
             android:exported="false" />
         <activity
-            android:name=".PrepareGameActivity"
+            android:name=".activities.PrepareGameActivity"
             android:exported="false" />
         <activity
-            android:name=".ChangeTokenActivity"
+            android:name=".activities.ChangeTokenActivity"
             android:exported="false" />
         <activity
-            android:name=".SetupLevelActivity"
+            android:name=".activities.SetupLevelActivity"
             android:exported="false" />
         <activity
-            android:name=".SetupOptionActivity"
+            android:name=".activities.SetupOptionActivity"
             android:exported="false" />
         <activity
-            android:name=".SetupTokenActivity"
+            android:name=".activities.SetupTokenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

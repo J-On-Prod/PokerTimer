@@ -4,7 +4,7 @@ import android.graphics.Color;
 
 import java.io.Serializable;
 
-public class ColorToken implements Serializable {
+public class ColorToken implements Serializable  {
 
     public static ColorToken WHITE = new ColorToken(Color.LTGRAY, "BLANC");
     public static ColorToken BLUE = new ColorToken(Color.BLUE, "BLEU");
@@ -32,5 +32,9 @@ public class ColorToken implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public Boolean isSameColor(ColorToken other) {
+        return this.getName().equals(other.getName());
     }
 }

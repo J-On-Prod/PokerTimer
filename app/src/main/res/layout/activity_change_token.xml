@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChangeTokenActivity">
+    tools:context=".activities.ChangeTokenActivity">
 
     <TextView
         android:id="@+id/textView7"
@@ -102,5 +102,15 @@
         android:text="Valider ☑"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/removeToken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#F44336"
+        android:text="Supprimer 🗑"
+        app:layout_constraintBottom_toBottomOf="@+id/backTokenButton"
+        app:layout_constraintEnd_toStartOf="@+id/validTokenButton"
+        app:layout_constraintStart_toEndOf="@+id/backTokenButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

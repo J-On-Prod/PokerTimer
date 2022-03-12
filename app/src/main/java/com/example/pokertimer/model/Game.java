@@ -86,7 +86,7 @@ public class Game implements Serializable {
 
     public boolean isColorExist(ColorToken colorToken) {
         for (Token token : tokenList) {
-            if (token.getColor() == colorToken) {
+            if (token.getColor().isSameColor(colorToken)) {
                 return true;
             }
         }

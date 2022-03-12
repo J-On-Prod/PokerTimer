@@ -1,15 +1,16 @@
-package com.example.pokertimer;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.pokertimer.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.pokertimer.R;
 import com.example.pokertimer.model.ColorToken;
 import com.example.pokertimer.model.ColorTokenAdapter;
 import com.example.pokertimer.model.Game;
@@ -17,7 +18,7 @@ import com.example.pokertimer.model.Token;
 
 import java.util.ArrayList;
 
-public class ChangeTokenActivity extends AppCompatActivity {
+public class ChangeTokenActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Game game;
     Token token;
@@ -36,12 +37,14 @@ public class ChangeTokenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_change_token);
 
         getIntentData();
-        //createColorTokenList();
+        createColorTokenList();
 
-        //createSpinner();
+        createSpinner();
         createEditValue();
         createEditNumberToken();
+
         createBackTokenButton();
+        createRemoveTokenButton();
         createValidTokenButton();
     }
 
@@ -54,22 +57,19 @@ public class ChangeTokenActivity extends AppCompatActivity {
 
     private void createColorTokenList() {
         colorTokensList = new ArrayList<ColorToken>();
-
+        colorTokensList.add(token.getColor());
         for (ColorToken colorTested : ColorToken.listAllColor) {
             if (!game.isColorExist(colorTested)) {
                 colorTokensList.add(colorTested);
             }
         }
-
     }
 
     private void createSpinner() {
         spinner = (Spinner) findViewById(R.id.spinnerColor);
         colorTokenAdapter = new ColorTokenAdapter(ChangeTokenActivity.this, colorTokensList);
         spinner.setAdapter(colorTokenAdapter);
-        spinner.setOnItemClickListener((parent, view, position1, id) -> {
-            token.setColor(colorTokensList.get(position1));
-        });
+        spinner.setOnItemSelectedListener(this);
     }
 
     private void createEditValue() {
@@ -93,9 +93,15 @@ public class ChangeTokenActivity extends AppCompatActivity {
         b.setOnClickListener(v -> passIntent());
     }
 
-    private void setAllValueOnToken() {
-        // ColorToken colorToken = colorTokensList.get(spinner.getBaseline());
-        // token.setColor(colorToken);
+    private void createRemoveTokenButton() {
+        Button b = findViewById(R.id.removeToken);
+        b.setOnClickListener(v -> {
+            game.deleteToken(position);
+            passIntent();
+        });
+    }
+
+    private void updateValueOnToken() {
         int val = Integer.parseInt(editValue.getText().toString());
         token.setValue(val);
         int nbToken = Integer.parseInt(editNumberToken.getText().toString());
@@ -105,10 +111,20 @@ public class ChangeTokenActivity extends AppCompatActivity {
     private void createValidTokenButton() {
         Button b = findViewById(R.id.validTokenButton);
         b.setOnClickListener(v -> {
-            setAllValueOnToken();
+            updateValueOnToken();
             game.setToken(position, token);
             passIntent();
         });
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        ColorToken colorSelect = colorTokensList.get(i);
+        token.setColor(colorSelect);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        // Anything here
+    }
 }

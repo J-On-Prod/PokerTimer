@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.ColorRes;
-
 import com.example.pokertimer.R;
 
 import java.util.List;
@@ -25,6 +23,9 @@ public class ColorTokenAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        if (colorList == null) {
+            return 0;
+        }
         return colorList.size();
     }
 
