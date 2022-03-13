@@ -2,6 +2,7 @@ package com.jon.pokertimer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class SetupLevelActivity extends AppCompatActivity {
         createLevelList();
         createButtonBackOptions();
         createButtonNextLaunchGame();
+        Log.d("PokerApp", game.getLevelList().toString());
     }
 
     private void getIntentData() {

@@ -45,7 +45,7 @@ public class ColorTokenAdapter extends BaseAdapter {
         ColorToken colorToken = colorList.get(position);
 
         TextView textView = view.findViewById(R.id.textColor);
-        textView.setText(colorToken.getName());
+        textView.setText(colorToken.getDefaultName());
 
         View viewColor = view.findViewById(R.id.viewColor);
         viewColor.setBackgroundColor(colorToken.getColorValue());

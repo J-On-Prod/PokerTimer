@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#F44336"
         android:text="@string/remove"
-        app:icon="@drawable/ic_baseline_remove_circle_24"
+        app:icon="@drawable/ic_baseline_clear_24"
         app:layout_constraintBottom_toBottomOf="@+id/backTokenButton"
         app:layout_constraintEnd_toStartOf="@+id/validTokenButton"
         app:layout_constraintStart_toEndOf="@+id/backTokenButton" />

@@ -177,7 +177,7 @@ public class Game implements Serializable {
         totalValuePerPlayer = 0;
         totalNbPerPlayer = 0;
         for (Token token : tokenList) {
-            int nbTokenPerPlayer = (int) Math.floor(token.getNumber() * (1 - percentageBankToken) * 0.01);
+            int nbTokenPerPlayer = (int) Math.floor((token.getNumber() * (1 - (percentageBankToken * 0.01)))/nbPlayer);
             totalNbPerPlayer += nbTokenPerPlayer;
             totalValuePerPlayer += nbTokenPerPlayer * token.getValue();
             Token newToken = new Token(nbTokenPerPlayer, token.getValue(), token.getColor());

@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:ems="3"
                 android:inputType="number"
+                android:textAlignment="textEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -82,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:ems="3"
                 android:inputType="number"
+                android:textAlignment="textEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -109,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:ems="3"
                 android:inputType="number"
+                android:textAlignment="textEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -136,6 +139,7 @@
                 android:layout_height="wrap_content"
                 android:ems="3"
                 android:inputType="number"
+                android:textAlignment="textEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -163,6 +167,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
+                android:textAlignment="textEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -191,6 +196,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
+                android:textAlignment="textEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
