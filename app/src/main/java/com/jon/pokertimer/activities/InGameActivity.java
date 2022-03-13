@@ -48,7 +48,7 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private void createBlindTimerTexts() {
-        levelValue = findViewById(R.id.textCurrentLevel);
+        levelValue = findViewById(R.id.textCurrentLevelVal);
         smallBlindValue = findViewById(R.id.textCurrentSB);
         bigBlindValue = findViewById(R.id.textCurrentBB);
         timerLevel = findViewById(R.id.textTimerLevel);

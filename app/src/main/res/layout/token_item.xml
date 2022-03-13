@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Couleur du jeton :"
+                    android:text="@string/color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -77,7 +77,7 @@
                         android:id="@+id/labelNumberToken"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nb jetons : "
+                        android:text="@string/nbToken"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -86,6 +86,7 @@
                         android:id="@+id/numberToken"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:text="20"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintStart_toEndOf="@+id/labelNumberToken"
@@ -103,13 +104,14 @@
                         android:id="@+id/labelValueToken"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Valeur du jeton : "
+                        android:text="@string/tokenValue"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
                         android:id="@+id/valueToken"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:text="20"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintStart_toEndOf="@+id/labelValueToken" />

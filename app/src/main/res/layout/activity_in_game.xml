@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Chronomètre"
+        android:text="@string/chrono"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,15 +73,25 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textCurrentLevel"
+        android:id="@+id/textCurrentLevelLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Niveau : 0"
+        android:text="@string/levelChrono"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textCurrentLevelVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="0"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toEndOf="@+id/textCurrentLevelLabel"
+        app:layout_constraintTop_toTopOf="@+id/textCurrentLevelLabel" />
 
     <Button
         android:id="@+id/buttonIncrementLevel"
@@ -89,7 +99,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Niveau suivant - +"
+        android:text="@string/nextLevel"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:iconGravity="textEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -99,10 +111,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Small Blind : "
+        android:text="@string/smallBlindChrono"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCurrentLevel" />
+        app:layout_constraintTop_toBottomOf="@+id/textCurrentLevelLabel" />
 
     <TextView
         android:id="@+id/textView18"
@@ -110,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Big Blind : "
+        android:text="@string/bigBlindChrono"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -140,7 +152,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Start / Pause - > / ||"
+        android:text="@string/startPause"
+        app:icon="@android:drawable/ic_media_play"
+        app:iconGravity="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/buttonIncrementLevel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -150,7 +164,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Compter jetons"
+        android:text="@string/tokenCounter"
+        app:icon="@drawable/ic_baseline_calculate_24"
         app:layout_constraintBottom_toBottomOf="@+id/buttonIncrementLevel"
         app:layout_constraintStart_toStartOf="parent" />
 

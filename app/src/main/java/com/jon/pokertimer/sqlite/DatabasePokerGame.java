@@ -1,5 +1,6 @@
 package com.jon.pokertimer.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -7,9 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.jon.pokertimer.model.Game;
+import com.jon.pokertimer.model.Token;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DatabasePokerGame extends SQLiteOpenHelper {
@@ -19,16 +20,13 @@ public class DatabasePokerGame extends SQLiteOpenHelper {
 
     private static final String TABLE_GAME = "Game";
     private static final String COL_GAME_ID= "ID";
+    private static final String COL_GAME_NAME = "NAME";
     private static final String COL_GAME_NB_PLAYER = "NB_PLAYER";
     private static final String COL_GAME_DURATION_LEVEL = "DURATION_LEVEL";
     private static final String COL_GAME_DURATION_GAME = "DURATION_GAME";
     private static final String COL_GAME_PAUSE_LEVEL = "PAUSE_LEVEL";
     private static final String COL_GAME_PERCENTAGE_BANK_TOKEN = "PERCENTAGE_BANK_TOKEN";
     private static final String COL_GAME_START_SMALL_BLIND = "START_SMALL_BLIND";
-    private static final String COL_GAME_TOTAL_TOKEN = "TOTAL_TOKEN";
-    private static final String COL_GAME_TOTAL_CAVE = "TOTAL_CAVE";
-    private static final String COL_GAME_VALUE_PLAYER = "VALUE_PLAYER";
-    private static final String COL_GAME_NB_TOKEN_PLAYER = "NB_TOKEN_PLAYER";
 
     private static final String TABLE_TOKEN = "Token";
     private static final String COL_TOKEN_ID = "ID";
@@ -49,6 +47,8 @@ public class DatabasePokerGame extends SQLiteOpenHelper {
         sBuilder.append("(");
         sBuilder.append(COL_GAME_ID);
         sBuilder.append(" INTEGER PRIMARY KEY,");
+        sBuilder.append(COL_GAME_NAME);
+        sBuilder.append(" TEXT,");
         sBuilder.append(COL_GAME_NB_PLAYER);
         sBuilder.append(" INTEGER,");
         sBuilder.append(COL_GAME_DURATION_LEVEL);
@@ -60,14 +60,6 @@ public class DatabasePokerGame extends SQLiteOpenHelper {
         sBuilder.append(COL_GAME_PERCENTAGE_BANK_TOKEN);
         sBuilder.append(" INTEGER,");
         sBuilder.append(COL_GAME_START_SMALL_BLIND);
-        sBuilder.append(" INTEGER,");
-        sBuilder.append(COL_GAME_TOTAL_TOKEN);
-        sBuilder.append(" INTEGER,");
-        sBuilder.append(COL_GAME_TOTAL_CAVE);
-        sBuilder.append(" INTEGER,");
-        sBuilder.append(COL_GAME_VALUE_PLAYER);
-        sBuilder.append(" INTEGER,");
-        sBuilder.append(COL_GAME_NB_TOKEN_PLAYER);
         sBuilder.append(" INTEGER)");
         execQuery(db, sBuilder.toString());
     }
@@ -98,6 +90,8 @@ public class DatabasePokerGame extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         createTableGame(db);
         createTableToken(db);
+
+        db.close();
     }
 
     @Override
@@ -106,7 +100,32 @@ public class DatabasePokerGame extends SQLiteOpenHelper {
     }
 
     public void addGame(Game game) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues valGame = new ContentValues();
+        valGame.put(COL_GAME_NAME, game.getName());
+        valGame.put(COL_GAME_NB_PLAYER, game.getNbPlayer());
+        valGame.put(COL_GAME_DURATION_LEVEL, game.getDurationLevel());
+        valGame.put(COL_GAME_DURATION_GAME, game.getDurationGame());
+        valGame.put(COL_GAME_PAUSE_LEVEL, game.getPauseEveryLevel());
+        valGame.put(COL_GAME_PERCENTAGE_BANK_TOKEN, game.getPercentageBankTokenToString());
+        valGame.put(COL_GAME_START_SMALL_BLIND, game.getStartSmallBlind());
+
+        db.insert(TABLE_GAME, null, valGame);
+
+        addTokens(game.getTokenList(), 1, db);
+        db.close();
+    }
+
+    private void addTokens(List<Token> tokenList, int idGame, SQLiteDatabase db) {
+        for (Token token : tokenList) {
+            ContentValues valToken = new ContentValues();
+            valToken.put(COL_TOKEN_ID_GAME, idGame);
+            valToken.put(COL_GAME_NAME, token.getColorToString());
+            valToken.put(COL_TOKEN_VALUE, token.getValue());
+
+            db.insert(TABLE_TOKEN, null, valToken);
+        }
     }
 
     public Game getGame(int id) {

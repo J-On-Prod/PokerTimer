@@ -85,7 +85,7 @@ public class SetupOptionActivity extends AppCompatActivity {
         int durationGameEdit = Integer.parseInt(editDurationGame.getText().toString());
         game.setDurationGame(durationGameEdit);
         int durationLevelEdit = Integer.parseInt(editDurationLevel.getText().toString());
-        game.setDefaultDurationLevel(durationLevelEdit);
+        game.setDurationLevel(durationLevelEdit);
         int smallBlindEdit = Integer.parseInt(editSmallBlind.getText().toString());
         game.setStartSmallBlind(smallBlindEdit);
         int pauseEdit = Integer.parseInt(editLevelBtwPauses.getText().toString());

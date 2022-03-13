@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="color">Couleur</string>
+    <string name="value">Valeur</string>
+    <string name="changeToken">Paramétage du jeton</string>
+    <string name="back">Retour</string>
+    <string name="remove">Supprimer</string>
+    <string name="apply">Appliquer</string>
+    <string name="nbToken">Nombre de jetons</string>
+    <string name="tokenCounter">Compteur de jetons</string>
+    <string name="levelChrono">Niveau :</string>
+    <string name="chrono">Chronomètre</string>
+    <string name="smallBlindChrono">Petite blinde :</string>
+    <string name="bigBlindChrono">Grosse blinde :</string>
+    <string name="nextLevel">Niveau suivant</string>
+    <string name="startPause">Démarrage / Pause</string>
+    <string name="nbTokenPlayer">Nombre de jetons par joueur</string>
+    <string name="totalNbToken">Total du nombre de jeton :</string>
+    <string name="totalValToken">Total de la valeur des jetons :</string>
+    <string name="startGame">Démarrer la partie</string>
+    <string name="levelsSettings">Paramétrage des niveaux</string>
+    <string name="settingsBack">Paramétrage</string>
+    <string name="launch">" Lancer"</string>
+    <string name="nbPlayer">Nombre de joueurs</string>
+    <string name="tokens">Jetons</string>
+    <string name="levels">Niveaux</string>
+    <string name="nbLevelPauses">Nombre de niveau entre les pauses</string>
+    <string name="percentageTokensBank">Pourcentage de jetons en banque</string>
+    <string name="earlySmallBlindValue">Valeur petite blinde en début de partie</string>
+    <string name="gameDuration">Durée de la partie</string>
+    <string name="levelDuration">Durée des niveaux</string>
+    <string name="calculateAllLevel">Calculer tous les niveaux ?</string>
+    <string name="settingsTokens">Paramétrages des jetons</string>
+    <string name="totalDuration">"Durée total : "</string>
+    <string name="duration">Durée :</string>
+    <string name="pause">Pause</string>
+    <string name="tokenValue">Valeur du jeton</string>
+</resources>

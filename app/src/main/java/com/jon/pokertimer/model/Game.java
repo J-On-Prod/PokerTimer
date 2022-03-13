@@ -14,8 +14,9 @@ public class Game implements Serializable {
     private ArrayList<Token> tokenList;
     private ArrayList<Token> tokensPerPlayer;
     private ArrayList<Level> levelList;
+    private String name = "New game";
     private Integer nbPlayer = 4;
-    private Integer defaultDurationLevel = 10;
+    private Integer durationLevel = 10;
     private Integer durationGame = 240;
     private Integer pauseEveryLevel = 5;
     private Integer percentageBankToken = 15;
@@ -55,6 +56,14 @@ public class Game implements Serializable {
         tokenList.add(new Token(200, 60, ColorToken.BLACK));
 
         levelList = new ArrayList<Level>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getNbPlayer() {
+        return nbPlayer;
     }
 
     /* TOKENS */
@@ -99,6 +108,10 @@ public class Game implements Serializable {
 
     /* LEVELS */
 
+    public Integer getDurationLevel() {
+        return durationLevel;
+    }
+
     private void calculateTotalValueToken() {
         this.totalToken = 0;
         for (Token token : tokenList) {
@@ -120,7 +133,7 @@ public class Game implements Serializable {
     }
 
     private int getTotalOfLevelPlay() {
-        return getRatioPlay() * (this.durationGame / this.defaultDurationLevel);
+        return getRatioPlay() * (this.durationGame / this.durationLevel);
     }
 
     private double getNbSteps() {
@@ -142,8 +155,8 @@ public class Game implements Serializable {
         while (increment < totalCave) {
             int moduloLevel = nbLvl % (pauseEveryLevel + 1);
             boolean breakGame = moduloLevel == (pauseEveryLevel - 1);
-            int durationIncrement = defaultDurationLevel * nbLvl;
-            Level lvlCreate = new Level(breakGame, defaultDurationLevel, durationIncrement, roundValueToken(increment));
+            int durationIncrement = durationLevel * nbLvl;
+            Level lvlCreate = new Level(breakGame, durationLevel, durationIncrement, roundValueToken(increment));
             Log.d("PokerApp", lvlCreate.toString());
             levelList.add(lvlCreate);
             increment *= coefLevel;
@@ -235,11 +248,11 @@ public class Game implements Serializable {
     }
 
     public String getDefaultDurationLevelToString() {
-        return defaultDurationLevel.toString();
+        return durationLevel.toString();
     }
 
-    public void setDefaultDurationLevel(int defaultDurationLevel) {
-        this.defaultDurationLevel = defaultDurationLevel;
+    public void setDurationLevel(int durationLevel) {
+        this.durationLevel = durationLevel;
     }
 
     public int getPauseEveryLevel() {

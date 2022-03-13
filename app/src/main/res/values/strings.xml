@@ -1,3 +1,38 @@
 <resources>
-    <string name="app_name">PokerTimer</string>
+    <string name="app_name" translatable="false">PokerTimer</string>
+    <string name="changeToken">Changing the token</string>
+    <string name="color">Color</string>
+    <string name="value">Value</string>
+    <string name="back">Back</string>
+    <string name="remove">Remove</string>
+    <string name="apply">Apply</string>
+    <string name="nbToken">Number of tokens</string>
+    <string name="tokenCounter">Token Counter</string>
+    <string name="levelChrono">Level :</string>
+    <string name="chrono">Chronometer</string>
+    <string name="smallBlindChrono">Small blind :</string>
+    <string name="bigBlindChrono">Big blind :</string>
+    <string name="nextLevel">Next level</string>
+    <string name="startPause">Start / Pause</string>
+    <string name="nbTokenPlayer">Number of tokens per player</string>
+    <string name="totalNbToken">Total number of token :</string>
+    <string name="totalValToken">total value of token :</string>
+    <string name="startGame">Start Game</string>
+    <string name="levelsSettings">Levels settings</string>
+    <string name="settingsBack">Settings</string>
+    <string name="launch">Launch</string>
+    <string name="nbPlayer">Number of player</string>
+    <string name="tokens">Tokens</string>
+    <string name="levels">Levels</string>
+    <string name="nbLevelPauses">Number of levels between pauses</string>
+    <string name="percentageTokensBank">Percentage of tokens in bank</string>
+    <string name="earlySmallBlindValue">Early Small Blind Value</string>
+    <string name="gameDuration">Game duration</string>
+    <string name="levelDuration">Level duration</string>
+    <string name="calculateAllLevel">Calculate all level ?</string>
+    <string name="settingsTokens">Settings tokens</string>
+    <string name="duration">Duration :</string>
+    <string name="totalDuration">Total duration :</string>
+    <string name="pause">Pause</string>
+    <string name="tokenValue">Token value</string>
 </resources>
