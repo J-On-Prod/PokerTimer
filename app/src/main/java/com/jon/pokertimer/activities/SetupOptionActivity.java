@@ -1,6 +1,4 @@
-package com.example.pokertimer.activities;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.jon.pokertimer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import com.example.pokertimer.R;
-import com.example.pokertimer.model.Game;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.jon.pokertimer.R;
+import com.jon.pokertimer.model.Game;
 
 public class SetupOptionActivity extends AppCompatActivity {
 

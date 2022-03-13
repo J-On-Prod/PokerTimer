@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pokertimer">
+    package="com.jon.pokertimer">
 
     <application
         android:allowBackup="true"
@@ -10,22 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PokerTimer">
         <activity
-            android:name=".activities.InGameActivity"
+            android:name="com.jon.pokertimer.activities.CountTokenActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.PrepareGameActivity"
+            android:name="com.jon.pokertimer.activities.InGameActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ChangeTokenActivity"
+            android:name="com.jon.pokertimer.activities.PrepareGameActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SetupLevelActivity"
+            android:name="com.jon.pokertimer.activities.ChangeTokenActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SetupOptionActivity"
+            android:name="com.jon.pokertimer.activities.SetupLevelActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SetupTokenActivity"
+            android:name="com.jon.pokertimer.activities.SetupOptionActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.jon.pokertimer.activities.SetupTokenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

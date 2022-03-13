@@ -1,4 +1,4 @@
-package com.example.pokertimer.model;
+package com.jon.pokertimer.model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.pokertimer.R;
+import com.jon.pokertimer.R;
 
 import java.util.List;
 

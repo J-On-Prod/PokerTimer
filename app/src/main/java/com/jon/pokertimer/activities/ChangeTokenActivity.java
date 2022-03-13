@@ -1,4 +1,4 @@
-package com.example.pokertimer.activities;
+package com.jon.pokertimer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,11 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.pokertimer.R;
-import com.example.pokertimer.model.ColorToken;
-import com.example.pokertimer.model.ColorTokenAdapter;
-import com.example.pokertimer.model.Game;
-import com.example.pokertimer.model.Token;
+import com.jon.pokertimer.R;
+import com.jon.pokertimer.model.ColorToken;
+import com.jon.pokertimer.model.ColorTokenAdapter;
+import com.jon.pokertimer.model.Game;
+import com.jon.pokertimer.model.Token;
 
 import java.util.ArrayList;
 

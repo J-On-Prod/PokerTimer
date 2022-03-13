@@ -1,4 +1,4 @@
-package com.example.pokertimer.model;
+package com.jon.pokertimer.model;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pokertimer.R;
+import com.jon.pokertimer.R;
 
 import java.util.List;
 
@@ -15,7 +15,9 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelViewHolder> {
 
     List<Level> levels;
 
-    public LevelAdapter(List<Level> levels) { this.levels = levels; }
+    public LevelAdapter(List<Level> levels) {
+        this.levels = levels;
+    }
 
     @NonNull
     @Override

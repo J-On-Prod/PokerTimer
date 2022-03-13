@@ -1,4 +1,4 @@
-package com.example.pokertimer.activities;
+package com.jon.pokertimer.activities;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.pokertimer.R;
-import com.example.pokertimer.model.Game;
-import com.example.pokertimer.model.Level;
+import com.jon.pokertimer.R;
+import com.jon.pokertimer.model.Game;
+import com.jon.pokertimer.model.Level;
 
 public class InGameActivity extends AppCompatActivity {
 
@@ -132,7 +132,7 @@ public class InGameActivity extends AppCompatActivity {
         Long hours = (milliseconds / 3600000) / 1000;
         Long minutes = (milliseconds / 60000 % 3600000) / 1000;
         Long seconds = (milliseconds % 60000) / 1000;
-        return hours.toString()+":"+minutes.toString()+":"+seconds.toString();
+        return hours.toString() + ":" + minutes.toString() + ":" + seconds.toString();
     }
 
     private void updateTimer() {

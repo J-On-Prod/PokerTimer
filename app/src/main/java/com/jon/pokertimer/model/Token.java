@@ -1,9 +1,6 @@
-package com.example.pokertimer.model;
-
-import android.graphics.Color;
+package com.jon.pokertimer.model;
 
 import java.io.Serializable;
-import java.lang.invoke.VolatileCallSite;
 
 public class Token implements Serializable, Comparable<Token> {
 
@@ -11,7 +8,8 @@ public class Token implements Serializable, Comparable<Token> {
     private Integer number = 1;
     private ColorToken color = ColorToken.GREY;
 
-    public Token() {}
+    public Token() {
+    }
 
     public Token(int value, int number, ColorToken color) {
         this.value = value;

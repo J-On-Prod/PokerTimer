@@ -1,10 +1,10 @@
-package com.example.pokertimer.model;
+package com.jon.pokertimer.model;
 
 import android.graphics.Color;
 
 import java.io.Serializable;
 
-public class ColorToken implements Serializable  {
+public class ColorToken implements Serializable {
 
     public static ColorToken WHITE = new ColorToken(Color.LTGRAY, "BLANC");
     public static ColorToken BLUE = new ColorToken(Color.BLUE, "BLEU");
@@ -16,7 +16,16 @@ public class ColorToken implements Serializable  {
     public static ColorToken GREY = new ColorToken(Color.GRAY, "GRIS");
     public static ColorToken MAGENTA = new ColorToken(Color.MAGENTA, "MAGENTA");
 
-    public static ColorToken[] listAllColor = { WHITE, BLUE, RED, GREEN, BLACK, YELLOW, CYAN, GREY, MAGENTA};
+    public static ColorToken[] listAllColor = {WHITE, BLUE, RED, GREEN, BLACK, YELLOW, CYAN, GREY, MAGENTA};
+
+    public static ColorToken getColorTokenByName(String name) {
+        for (ColorToken colorToken : listAllColor) {
+            if (colorToken.getName().equals(name)) {
+                return colorToken;
+            }
+        }
+        return null;
+    }
 
     private final int colorValue;
     private final String name;

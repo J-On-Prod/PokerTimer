@@ -1,4 +1,4 @@
-package com.example.pokertimer.activities;
+package com.jon.pokertimer.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,11 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pokertimer.R;
-import com.example.pokertimer.activities.ChangeTokenActivity;
-import com.example.pokertimer.activities.SetupOptionActivity;
-import com.example.pokertimer.model.Game;
-import com.example.pokertimer.model.TokenAdapter;
+import com.jon.pokertimer.R;
+import com.jon.pokertimer.model.Game;
+import com.jon.pokertimer.model.TokenAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SetupTokenActivity extends AppCompatActivity implements TokenAdapter.OnTokenListener {
@@ -50,7 +48,7 @@ public class SetupTokenActivity extends AppCompatActivity implements TokenAdapte
     }
 
     private void createListToken() {
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.listTokens);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listTokens);
         this.tokenAdapter = new TokenAdapter(game.getTokenList(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(tokenAdapter);

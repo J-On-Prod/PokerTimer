@@ -1,16 +1,16 @@
-package com.example.pokertimer.activities;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.jon.pokertimer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.example.pokertimer.R;
-import com.example.pokertimer.model.Game;
-import com.example.pokertimer.model.LevelAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.jon.pokertimer.R;
+import com.jon.pokertimer.model.Game;
+import com.jon.pokertimer.model.LevelAdapter;
 
 public class SetupLevelActivity extends AppCompatActivity {
 

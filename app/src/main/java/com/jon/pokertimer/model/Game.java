@@ -1,6 +1,8 @@
-package com.example.pokertimer.model;
+package com.jon.pokertimer.model;
 
 import static java.lang.Math.round;
+
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,7 +72,9 @@ public class Game implements Serializable {
         Collections.sort(this.tokenList);
     }
 
-    public void deleteToken(int position) { this.tokenList.remove(position); }
+    public void deleteToken(int position) {
+        this.tokenList.remove(position);
+    }
 
     public Token getToken(int position) {
         return this.tokenList.get(position);
@@ -107,8 +111,8 @@ public class Game implements Serializable {
     }
 
     private int getRatioPlay() {
-        int ratioPause = 1/(this.getPauseEveryLevel()+1);
-        return 1-ratioPause;
+        int ratioPause = 1 / (this.getPauseEveryLevel() + 1);
+        return 1 - ratioPause;
     }
 
     private int getRealTimePlay() {
@@ -130,16 +134,17 @@ public class Game implements Serializable {
     }
 
     private void generateLevels() {
-        double coefLevel =  getCoefLevel();
+        double coefLevel = getCoefLevel();
         double increment = startSmallBlind.doubleValue();
         int nbLvl = 0;
         levelList = new ArrayList<Level>();
 
         while (increment < totalCave) {
-            int moduloLevel = nbLvl%(pauseEveryLevel+1);
-            boolean breakGame = moduloLevel == (pauseEveryLevel-1);
+            int moduloLevel = nbLvl % (pauseEveryLevel + 1);
+            boolean breakGame = moduloLevel == (pauseEveryLevel - 1);
             int durationIncrement = defaultDurationLevel * nbLvl;
             Level lvlCreate = new Level(breakGame, defaultDurationLevel, durationIncrement, roundValueToken(increment));
+            Log.d("PokerApp", lvlCreate.toString());
             levelList.add(lvlCreate);
             increment *= coefLevel;
             nbLvl++;
@@ -184,7 +189,9 @@ public class Game implements Serializable {
         return levelList.get(position);
     }
 
-    public String getNbPlayerToString() { return nbPlayer.toString(); }
+    public String getNbPlayerToString() {
+        return nbPlayer.toString();
+    }
 
     public void setNbPlayer(int nbPlayer) {
         this.nbPlayer = nbPlayer;
@@ -247,7 +254,9 @@ public class Game implements Serializable {
         this.percentageBankToken = percentageBankToken;
     }
 
-    public String getPauseEveryLevelToString() { return pauseEveryLevel.toString(); }
+    public String getPauseEveryLevelToString() {
+        return pauseEveryLevel.toString();
+    }
 
     public void setPauseEveryLevel(int pauseEveryLevel) {
         this.pauseEveryLevel = pauseEveryLevel;

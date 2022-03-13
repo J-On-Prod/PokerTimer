@@ -1,4 +1,4 @@
-package com.example.pokertimer.model;
+package com.jon.pokertimer.model;
 
 import android.view.View;
 import android.widget.TextView;
@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pokertimer.R;
+import com.jon.pokertimer.R;
 
 public class LevelViewHolder extends RecyclerView.ViewHolder {
 

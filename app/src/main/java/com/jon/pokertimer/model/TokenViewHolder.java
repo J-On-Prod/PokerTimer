@@ -1,13 +1,12 @@
-package com.example.pokertimer.model;
+package com.jon.pokertimer.model;
 
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pokertimer.R;
+import com.jon.pokertimer.R;
 
 public class TokenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

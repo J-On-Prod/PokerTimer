@@ -1,18 +1,17 @@
-package com.example.pokertimer.activities;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.jon.pokertimer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.pokertimer.R;
-import com.example.pokertimer.activities.InGameActivity;
-import com.example.pokertimer.model.Game;
-import com.example.pokertimer.model.TokenAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.jon.pokertimer.R;
+import com.jon.pokertimer.model.Game;
+import com.jon.pokertimer.model.TokenAdapter;
 
 public class PrepareGameActivity extends AppCompatActivity implements TokenAdapter.OnTokenListener {
 
@@ -36,6 +35,8 @@ public class PrepareGameActivity extends AppCompatActivity implements TokenAdapt
     private void createButtonStartGame() {
         Button startGameButton = findViewById(R.id.buttonStartGame);
         startGameButton.setOnClickListener(v -> touchStartGameButton());
+        Button backButton = findViewById(R.id.backTokenPerPlayer);
+        backButton.setOnClickListener(v -> touchBackGameButton());
     }
 
     private void createRecyclerTokenPerPlayer() {
@@ -50,6 +51,12 @@ public class PrepareGameActivity extends AppCompatActivity implements TokenAdapt
         nbTokenPerPlayer.setText(game.getTotalNbPerPlayerToString());
         TextView valueTokenPerPlayer = findViewById(R.id.textValueTokenPerPlayer);
         valueTokenPerPlayer.setText(game.getTotalValuePerPlayerToString());
+    }
+
+    private void touchBackGameButton() {
+        Intent intent = new Intent(getApplicationContext(), SetupLevelActivity.class);
+        intent.putExtra("Game", game);
+        startActivity(intent);
     }
 
     private void touchStartGameButton() {

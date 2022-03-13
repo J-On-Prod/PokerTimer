@@ -1,4 +1,4 @@
-package com.example.pokertimer;
+package com.jon.pokertimer;
 
 import org.junit.Test;
 

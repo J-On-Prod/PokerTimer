@@ -1,7 +1,6 @@
-package com.example.pokertimer.model;
+package com.jon.pokertimer.model;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.io.Serializable;
 
@@ -18,11 +17,11 @@ public class Level implements Serializable {
     }
 
     public Level(boolean breakGame, int duration, int durationIncrement) {
-        this(breakGame, duration, durationIncrement,1, 2);
+        this(breakGame, duration, durationIncrement, 1, 2);
     }
 
     public Level(boolean breakGame, int duration, int durationIncrement, int smallBlind) {
-        this(breakGame, duration, durationIncrement, smallBlind, smallBlind*2);
+        this(breakGame, duration, durationIncrement, smallBlind, smallBlind * 2);
     }
 
     public Level(boolean breakGame, int duration, int durationIncrement, int smallBlind, int bigBlind) {
@@ -72,7 +71,7 @@ public class Level implements Serializable {
         this.durationIncrement = durationIncrement;
     }
 
-    public String  getSmallBlindToString() {
+    public String getSmallBlindToString() {
         return smallBlind.toString();
     }
 
@@ -89,7 +88,17 @@ public class Level implements Serializable {
     }
 
     public double ratioLeftTime(long timeInMilliseconds) {
-        return (timeInMilliseconds/1000) / duration;
+        return (timeInMilliseconds / 1000) / duration;
     }
 
+    @Override
+    public String toString() {
+        return "Level{" +
+                "breakGame=" + breakGame +
+                ", duration=" + duration +
+                ", durationIncrement=" + durationIncrement +
+                ", smallBlind=" + smallBlind +
+                ", bigBlind=" + bigBlind +
+                '}';
+    }
 }
