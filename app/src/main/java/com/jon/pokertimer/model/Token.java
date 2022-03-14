@@ -33,6 +33,10 @@ public class Token implements Serializable, Comparable<Token> {
         return number;
     }
 
+    public void addNumber(int number) {
+        this.number += number;
+    }
+
     public String getNumberToString() {
         return number.toString();
     }

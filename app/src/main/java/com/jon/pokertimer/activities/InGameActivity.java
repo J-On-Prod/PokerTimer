@@ -1,5 +1,6 @@
 package com.jon.pokertimer.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.Button;
@@ -41,9 +42,12 @@ public class InGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_in_game);
 
         getIntentGame();
+
         createBlindTimerTexts();
+        createButtonCountToken();
         createButtonPlayPause();
         createButtonSkipToNextLevel();
+
         startGame();
     }
 
@@ -60,6 +64,15 @@ public class InGameActivity extends AppCompatActivity {
 
     private void getIntentGame() {
         game = (Game) getIntent().getSerializableExtra("Game");
+    }
+
+    private void createButtonCountToken() {
+        Button playPauseButton = findViewById(R.id.buttonCountToken);
+        playPauseButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), CountTokenActivity.class);
+            intent.putExtra("Game", game);
+            startActivity(intent);
+        });
     }
 
     private void createButtonPlayPause() {
@@ -112,7 +125,9 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private void incrementeLevel() {
-        levelSelect++;
+        if (levelSelect+1 < game.getLevelList().size()) {
+            levelSelect++;
+        }
         updateLevel();
         startTimers();
     }
@@ -122,7 +137,7 @@ public class InGameActivity extends AppCompatActivity {
         currentLevel = game.getLevel(levelSelect);
         timeLeftLevelMls = currentLevel.getDuration();
 
-        String levelSelectToString = "Niveau : " + levelSelect.toString();
+        String levelSelectToString = levelSelect.toString();
         levelValue.setText(levelSelectToString);
         smallBlindValue.setText(currentLevel.getSmallBlindToString());
         bigBlindValue.setText(currentLevel.getBigBlindToString());

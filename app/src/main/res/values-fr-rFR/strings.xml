@@ -7,7 +7,7 @@
     <string name="remove">Supprimer</string>
     <string name="apply">Appliquer</string>
     <string name="nbToken">Nombre de jetons</string>
-    <string name="tokenCounter">Compteur de jetons</string>
+    <string name="tokenCounter">Compteur</string>
     <string name="levelChrono">Niveau :</string>
     <string name="chrono">Chronomètre</string>
     <string name="smallBlindChrono">Petite blinde :</string>
@@ -35,4 +35,5 @@
     <string name="duration">Durée :</string>
     <string name="pause">Pause</string>
     <string name="tokenValue">Valeur du jeton</string>
+    <string name="total">Total</string>
 </resources>

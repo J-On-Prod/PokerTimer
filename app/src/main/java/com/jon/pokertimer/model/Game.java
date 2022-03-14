@@ -13,11 +13,12 @@ public class Game implements Serializable {
 
     private ArrayList<Token> tokenList;
     private ArrayList<Token> tokensPerPlayer;
+    private ArrayList<Token> tokensCount;
     private ArrayList<Level> levelList;
     private String name = "New game";
     private Integer nbPlayer = 4;
     private Integer durationLevel = 10;
-    private Integer durationGame = 240;
+    private Integer durationGame = 120;
     private Integer pauseEveryLevel = 5;
     private Integer percentageBankToken = 15;
     private Integer startSmallBlind = -1;
@@ -30,7 +31,8 @@ public class Game implements Serializable {
     private HashMap<Integer, Integer> tmpTime = new HashMap<Integer, Integer>();
 
     private static int roundModulo(double val, int modulo) {
-        int difference = (int) (val % modulo);
+        val = round(val);
+        int difference = (int) round(val % modulo);
         if (difference < modulo / 2) {
             return (int) round(val - difference);
         }
@@ -54,7 +56,6 @@ public class Game implements Serializable {
         tokenList.add(new Token(25, 60, ColorToken.RED));
         tokenList.add(new Token(100, 60, ColorToken.GREEN));
         tokenList.add(new Token(200, 60, ColorToken.BLACK));
-
         levelList = new ArrayList<Level>();
     }
 
@@ -106,6 +107,31 @@ public class Game implements Serializable {
         return false;
     }
 
+    /* TOKEN COUNT */
+
+    public void generateTokenCount() {
+        resetTokenCount();
+        for (Token token : this.tokenList) {
+            tokensCount.add(new Token(token.getValue(), 0, token.getColor()));
+        }
+    }
+
+    public ArrayList<Token> getTokensCount() {
+        return tokensCount;
+    }
+
+    public void resetTokenCount() {
+        tokensCount = new ArrayList<>();
+    }
+
+    public void addTokenNumber(int position, int number) {
+        this.tokensCount.get(position).addNumber(number);
+    }
+
+    public void setTokenNumber(int position, int number) {
+        this.tokensCount.get(position).setNumber(number);
+    }
+
     /* LEVELS */
 
     public Integer getDurationLevel() {
@@ -136,17 +162,13 @@ public class Game implements Serializable {
         return getRatioPlay() * (this.durationGame / this.durationLevel);
     }
 
-    private double getNbSteps() {
-        return 1.0 / getTotalOfLevelPlay();
-    }
-
     private double getCoefLevel() {
-        double bigBlind = startSmallBlind * 2.0;
-        double nbSteps = getNbSteps();
-        return Math.pow(getTenthOfCave() / bigBlind, nbSteps);
+        double nbSteps = getTotalOfLevelPlay();
+        return Math.pow(getTenthOfCave(), 1/nbSteps);
     }
 
     private void generateLevels() {
+        calculateTotalCave();
         double coefLevel = getCoefLevel();
         double increment = startSmallBlind.doubleValue();
         int nbLvl = 0;
@@ -154,19 +176,19 @@ public class Game implements Serializable {
 
         while (increment < totalCave) {
             int moduloLevel = nbLvl % (pauseEveryLevel + 1);
-            boolean breakGame = moduloLevel == (pauseEveryLevel - 1);
+            boolean breakGame = moduloLevel == (pauseEveryLevel);
             int durationIncrement = durationLevel * nbLvl;
             Level lvlCreate = new Level(breakGame, durationLevel, durationIncrement, roundValueToken(increment));
-            Log.d("PokerApp", lvlCreate.toString());
             levelList.add(lvlCreate);
-            increment *= coefLevel;
+            if (!breakGame) {
+                increment *= coefLevel;
+            }
             nbLvl++;
         }
-        calculateTotalCave();
     }
 
     private void calculateTotalCave() {
-        if (totalValuePerPlayer >= 0) {
+        if (totalValuePerPlayer > 0) {
             this.totalCave = totalValuePerPlayer * nbPlayer;
         }
     }
@@ -180,18 +202,18 @@ public class Game implements Serializable {
             int nbTokenPerPlayer = (int) Math.floor((token.getNumber() * (1 - (percentageBankToken * 0.01)))/nbPlayer);
             totalNbPerPlayer += nbTokenPerPlayer;
             totalValuePerPlayer += nbTokenPerPlayer * token.getValue();
-            Token newToken = new Token(nbTokenPerPlayer, token.getValue(), token.getColor());
+            Token newToken = new Token(token.getValue(), nbTokenPerPlayer, token.getColor());
             tokensPerPlayer.add(newToken);
         }
         calculateTotalCave();
     }
 
     public void calculateGame() {
-        if (calculateGame) {
-            this.generateLevels();
-            this.splitTokensPlayers();
-        }
         tmpTime = new HashMap<Integer, Integer>();
+        if (calculateGame) {
+            this.splitTokensPlayers();
+            this.generateLevels();
+        }
     }
 
     public ArrayList<Level> getLevelList() {

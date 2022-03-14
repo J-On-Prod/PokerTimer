@@ -2,7 +2,6 @@ package com.jon.pokertimer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +15,8 @@ import com.jon.pokertimer.model.LevelAdapter;
 public class SetupLevelActivity extends AppCompatActivity {
 
     private Game game;
-    LevelAdapter levelAdapter;
+    private LevelAdapter levelAdapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,6 @@ public class SetupLevelActivity extends AppCompatActivity {
         createLevelList();
         createButtonBackOptions();
         createButtonNextLaunchGame();
-        Log.d("PokerApp", game.getLevelList().toString());
     }
 
     private void getIntentData() {
@@ -38,7 +37,7 @@ public class SetupLevelActivity extends AppCompatActivity {
     }
 
     private void createLevelList() {
-        RecyclerView recyclerView = findViewById(R.id.recyclerLevel);
+        recyclerView = findViewById(R.id.recyclerLevel);
 
         levelAdapter = new LevelAdapter(game.getLevelList());
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

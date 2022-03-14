@@ -29,10 +29,6 @@ public class TokenAdapter extends RecyclerView.Adapter<TokenViewHolder> {
         return new TokenViewHolder(view, this.onTokenListener);
     }
 
-    public Token get(int position) {
-        return this.tokens.get(position);
-    }
-
     @Override
     public void onBindViewHolder(@NonNull TokenViewHolder holder, int position) {
         holder.display(tokens.get(position));

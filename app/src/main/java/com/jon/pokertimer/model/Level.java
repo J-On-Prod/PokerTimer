@@ -40,7 +40,7 @@ public class Level implements Serializable {
     }
 
     boolean getBreakGame() {
-        return this.getBreakGame();
+        return this.breakGame;
     }
 
     public void setBreakGame(boolean breakGame) {

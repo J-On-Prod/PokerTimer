@@ -19,6 +19,10 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelViewHolder> {
         this.levels = levels;
     }
 
+    public List<Level> getLevels() {
+        return levels;
+    }
+
     @NonNull
     @Override
     public LevelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

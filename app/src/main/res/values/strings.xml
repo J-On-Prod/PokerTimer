@@ -7,7 +7,7 @@
     <string name="remove">Remove</string>
     <string name="apply">Apply</string>
     <string name="nbToken">Number of tokens</string>
-    <string name="tokenCounter">Token Counter</string>
+    <string name="tokenCounter">Counter</string>
     <string name="levelChrono">Level :</string>
     <string name="chrono">Chronometer</string>
     <string name="smallBlindChrono">Small blind :</string>
@@ -35,4 +35,9 @@
     <string name="totalDuration">Total duration :</string>
     <string name="pause">Pause</string>
     <string name="tokenValue">Token value</string>
+    <string name="total">Total</string>
+    <string name="addOne" translatable="false">+ 1</string>
+    <string name="addFive" translatable="false">+ 5</string>
+    <string name="addTen" translatable="false">+ 10</string>
+    <string name="reset" translatable="false">Reset</string>
 </resources>
