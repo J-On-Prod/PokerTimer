@@ -107,7 +107,14 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private void stopTimers() {
-        countDownLevel.cancel();
+        // https://stackoverflow.com/questions/8306374/android-how-to-pause-and-resume-a-count-down-timer
+        // https://github.com/groverankush/Hourglass
+        try {
+            countDownLevel.wait();
+            countDownGlobal.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         timerRunning = false;
     }
 
