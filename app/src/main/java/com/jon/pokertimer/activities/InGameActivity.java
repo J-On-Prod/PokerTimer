@@ -2,7 +2,6 @@ package com.jon.pokertimer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -10,6 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jon.pokertimer.R;
+import com.jon.pokertimer.model.CountDownGlobal;
+import com.jon.pokertimer.model.CountDownLevel;
 import com.jon.pokertimer.model.Game;
 import com.jon.pokertimer.model.Level;
 
@@ -30,7 +31,8 @@ public class InGameActivity extends AppCompatActivity {
 
     private boolean timerRunning = false;
     private long timeLeftLevelMls = getSecondsInMilliseconds(600);
-    private CountDownTimer countDownLevel;
+    private CountDownLevel countDownLevel;
+    private CountDownGlobal countDownGlobal;
 
     private long getSecondsInMilliseconds(int seconds) {
         return seconds * 100L;
@@ -95,18 +97,12 @@ public class InGameActivity extends AppCompatActivity {
 
     private void startTimers() {
         long timeDurationLevel = getSecondsInMilliseconds(currentLevel.getDuration());
-        countDownLevel = new CountDownTimer(timeDurationLevel, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftLevelMls = millisUntilFinished;
-                updateTimer();
-            }
-
-            @Override
-            public void onFinish() {
-                incrementeLevel();
-            }
-        }.start();
+        long timeDurationGame = getSecondsInMilliseconds(game.getDurationGame());
+        int countInterval = 1000;
+        countDownLevel = new CountDownLevel(timeDurationLevel, countInterval, this);
+        countDownLevel.start();
+        countDownGlobal = new CountDownGlobal(timeDurationGame, countInterval, this);
+        countDownGlobal.start();
         timerRunning = true;
     }
 
@@ -124,7 +120,7 @@ public class InGameActivity extends AppCompatActivity {
         updateLevel();
     }
 
-    private void incrementeLevel() {
+    public void incrementeLevel() {
         if (levelSelect+1 < game.getLevelList().size()) {
             levelSelect++;
         }
@@ -144,13 +140,14 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private String convertMlsSecondsToString(long milliseconds) {
-        Long hours = (milliseconds / 3600000) / 1000;
-        Long minutes = (milliseconds / 60000 % 3600000) / 1000;
-        Long seconds = (milliseconds % 60000) / 1000;
+        Long hours = (milliseconds / 3600000);
+        Long minutes = (milliseconds / 60000) % 60;
+        Long seconds = (milliseconds / 1000) % 60;
         return hours.toString() + ":" + minutes.toString() + ":" + seconds.toString();
     }
 
-    private void updateTimer() {
+    public void updateTimer() {
+        // TODO : Need change this part
         int percentageLevel = (int) ((1 - currentLevel.ratioLeftTime(timeLeftLevelMls)) * resolutionProgressBar);
         progressBarLevel.setProgress(percentageLevel);
         timerLevel.setText(convertMlsSecondsToString(timeLeftLevelMls));
