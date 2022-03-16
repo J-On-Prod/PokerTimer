@@ -9,9 +9,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jon.pokertimer.R;
-import com.jon.pokertimer.model.CountDownGlobal;
-import com.jon.pokertimer.model.CountDownLevel;
 import com.jon.pokertimer.model.Game;
+import com.jon.pokertimer.model.HourglassGlobal;
+import com.jon.pokertimer.model.HourglassLevel;
 import com.jon.pokertimer.model.Level;
 
 public class InGameActivity extends AppCompatActivity {
@@ -30,9 +30,10 @@ public class InGameActivity extends AppCompatActivity {
     private final int resolutionProgressBar = 255;
 
     private boolean timerRunning = false;
-    private long timeLeftLevelMls = getSecondsInMilliseconds(600);
-    private CountDownLevel countDownLevel;
-    private CountDownGlobal countDownGlobal;
+
+    // https://github.com/groverankush/Hourglass
+    private HourglassLevel countDownLevel;
+    private HourglassGlobal countDownGlobal;
 
     private long getSecondsInMilliseconds(int seconds) {
         return seconds * 100L;
@@ -99,22 +100,16 @@ public class InGameActivity extends AppCompatActivity {
         long timeDurationLevel = getSecondsInMilliseconds(currentLevel.getDuration());
         long timeDurationGame = getSecondsInMilliseconds(game.getDurationGame());
         int countInterval = 1000;
-        countDownLevel = new CountDownLevel(timeDurationLevel, countInterval, this);
-        countDownLevel.start();
-        countDownGlobal = new CountDownGlobal(timeDurationGame, countInterval, this);
-        countDownGlobal.start();
+        countDownLevel = new HourglassLevel(timeDurationLevel, countInterval, this);
+        countDownLevel.startTimer();
+        countDownGlobal = new HourglassGlobal(timeDurationGame, countInterval, this);
+        countDownGlobal.startTimer();
         timerRunning = true;
     }
 
     private void stopTimers() {
-        // https://stackoverflow.com/questions/8306374/android-how-to-pause-and-resume-a-count-down-timer
-        // https://github.com/groverankush/Hourglass
-        try {
-            countDownLevel.wait();
-            countDownGlobal.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        countDownLevel.stopTimer();
+        countDownGlobal.stopTimer();
         timerRunning = false;
     }
 
@@ -138,7 +133,6 @@ public class InGameActivity extends AppCompatActivity {
     private void updateLevel() {
 
         currentLevel = game.getLevel(levelSelect);
-        timeLeftLevelMls = currentLevel.getDuration();
 
         String levelSelectToString = levelSelect.toString();
         levelValue.setText(levelSelectToString);
@@ -147,19 +141,21 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private String convertMlsSecondsToString(long milliseconds) {
-        Long hours = (milliseconds / 3600000);
-        Long minutes = (milliseconds / 60000) % 60;
-        Long seconds = (milliseconds / 1000) % 60;
-        return hours.toString() + ":" + minutes.toString() + ":" + seconds.toString();
+        long hours = (milliseconds / 3600000);
+        long minutes = (milliseconds / 60000) % 60;
+        long seconds = (milliseconds / 1000) % 60;
+        return hours + ":" + minutes + ":" + seconds;
     }
 
-    public void updateTimer() {
-        // TODO : Need change this part
-        int percentageLevel = (int) ((1 - currentLevel.ratioLeftTime(timeLeftLevelMls)) * resolutionProgressBar);
+    public void updateTimerGlobal(long timeRemaining) {
+        timerFinish.setText(convertMlsSecondsToString(timeRemaining));
+    }
+
+    public void updateTimerLevel(long timeRemaining) {
+        int percentageLevel = (int) ((1 - currentLevel.ratioLeftTime(timeRemaining)) * resolutionProgressBar);
         progressBarLevel.setProgress(percentageLevel);
-        timerLevel.setText(convertMlsSecondsToString(timeLeftLevelMls));
-        long timeLeftGlobal = game.getTimeLeftGame(levelSelect) - timeLeftLevelMls;
-        timerFinish.setText(convertMlsSecondsToString(timeLeftGlobal));
+        timerLevel.setText(convertMlsSecondsToString(timeRemaining));
+
     }
 }
 

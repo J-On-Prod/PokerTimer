@@ -88,7 +88,7 @@ public class Level implements Serializable {
     }
 
     public double ratioLeftTime(long timeInMilliseconds) {
-        return (timeInMilliseconds / 1000) / duration;
+        return (timeInMilliseconds / 1000.0) / duration;
     }
 
     @Override
