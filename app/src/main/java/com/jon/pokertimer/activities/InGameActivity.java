@@ -2,6 +2,7 @@ package com.jon.pokertimer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,10 +17,16 @@ import com.jon.pokertimer.model.Level;
 
 public class InGameActivity extends AppCompatActivity {
 
+    private static final int COUNT_INTERVAL = 1000;
+    private static final int RESOLUTION_PROGRESS_BAR = 500;
+
     private Game game;
 
     private Integer levelSelect;
     private Level currentLevel;
+
+    private long timeDurationLevel;
+    private long timeDurationGame;
 
     private TextView levelValue;
     private TextView smallBlindValue;
@@ -27,7 +34,6 @@ public class InGameActivity extends AppCompatActivity {
     private TextView timerLevel;
     private TextView timerFinish;
     private ProgressBar progressBarLevel;
-    private final int resolutionProgressBar = 255;
 
     private boolean timerRunning = false;
 
@@ -35,8 +41,8 @@ public class InGameActivity extends AppCompatActivity {
     private HourglassLevel countDownLevel;
     private HourglassGlobal countDownGlobal;
 
-    private long getSecondsInMilliseconds(int seconds) {
-        return seconds * 100L;
+    private long getMinutesInMilliseconds(int minutes) {
+        return minutes * 60000L;
     }
 
     @Override
@@ -62,7 +68,8 @@ public class InGameActivity extends AppCompatActivity {
         timerFinish = findViewById(R.id.textTimerFinishEstimate);
 
         progressBarLevel = findViewById(R.id.progressBarLevel);
-        progressBarLevel.setMax(resolutionProgressBar);
+        progressBarLevel.setMax(RESOLUTION_PROGRESS_BAR);
+        progressBarLevel.setIndeterminate(false);
     }
 
     private void getIntentGame() {
@@ -90,43 +97,76 @@ public class InGameActivity extends AppCompatActivity {
 
     private void touchPlayPause() {
         if (timerRunning) {
-            stopTimers();
+            pauseTimers();
         } else {
-            startTimers();
+            resumeTimers();
         }
     }
 
+    private void initTimers() {
+        resetTimerLevel();
+        resetTimerGame();
+        startTimers();
+    }
+
+    private void resetTimerLevel() {
+        timeDurationLevel = getMinutesInMilliseconds(currentLevel.getDuration());
+    }
+
+    private void resetTimerGame() {
+        timeDurationGame = getMinutesInMilliseconds(game.getDurationGameLevel(currentLevel));
+    }
+
     private void startTimers() {
-        long timeDurationLevel = getSecondsInMilliseconds(currentLevel.getDuration());
-        long timeDurationGame = getSecondsInMilliseconds(game.getDurationGame());
-        int countInterval = 1000;
-        countDownLevel = new HourglassLevel(timeDurationLevel, countInterval, this);
-        countDownLevel.startTimer();
-        countDownGlobal = new HourglassGlobal(timeDurationGame, countInterval, this);
-        countDownGlobal.startTimer();
+        setTimerGame(timeDurationGame);
+        setTimerLevel(timeDurationLevel);
+    }
+
+    private void setTimerLevel(long timeDurationLevel) {
+        if (countDownLevel == null) {
+            countDownLevel = new HourglassLevel(timeDurationLevel, COUNT_INTERVAL, this);
+        } else {
+            countDownLevel.setTime(timeDurationLevel);
+        }
+
+    }
+
+    private void setTimerGame(long timeDurationGame) {
+        if (countDownGlobal == null) {
+            countDownGlobal = new HourglassGlobal(timeDurationGame, COUNT_INTERVAL, this);
+        } else {
+            countDownGlobal.setTime(timeDurationGame);
+        }
+    }
+
+    private void resumeTimers() {
+        countDownLevel.resumeTimer();
+        countDownGlobal.resumeTimer();
         timerRunning = true;
     }
 
-    private void stopTimers() {
-        countDownLevel.stopTimer();
-        countDownGlobal.stopTimer();
+    private void pauseTimers() {
+        countDownLevel.pauseTimer();
+        countDownGlobal.pauseTimer();
         timerRunning = false;
     }
 
     private void touchChangeLevel() {
-        incrementeLevel();
+        incrementLevel();
     }
 
     private void startGame() {
         levelSelect = 0;
         updateLevel();
+        initTimers();
     }
 
-    public void incrementeLevel() {
+    public void incrementLevel() {
         if (levelSelect+1 < game.getLevelList().size()) {
             levelSelect++;
         }
         updateLevel();
+        resetTimerGame();
         startTimers();
     }
 
@@ -134,17 +174,24 @@ public class InGameActivity extends AppCompatActivity {
 
         currentLevel = game.getLevel(levelSelect);
 
-        String levelSelectToString = levelSelect.toString();
+        String levelSelectToString = String.valueOf(levelSelect+1);
         levelValue.setText(levelSelectToString);
         smallBlindValue.setText(currentLevel.getSmallBlindToString());
         bigBlindValue.setText(currentLevel.getBigBlindToString());
+    }
+
+    private String addZero(long duration) {
+        if (duration < 10) {
+            return "0" + duration;
+        }
+        return String.valueOf(duration);
     }
 
     private String convertMlsSecondsToString(long milliseconds) {
         long hours = (milliseconds / 3600000);
         long minutes = (milliseconds / 60000) % 60;
         long seconds = (milliseconds / 1000) % 60;
-        return hours + ":" + minutes + ":" + seconds;
+        return addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
     }
 
     public void updateTimerGlobal(long timeRemaining) {
@@ -152,7 +199,8 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     public void updateTimerLevel(long timeRemaining) {
-        int percentageLevel = (int) ((1 - currentLevel.ratioLeftTime(timeRemaining)) * resolutionProgressBar);
+        int percentageLevel = (int) ((currentLevel.ratioLeftTime(timeRemaining)) * RESOLUTION_PROGRESS_BAR);
+        Log.d("PokerApp", String.valueOf(percentageLevel));
         progressBarLevel.setProgress(percentageLevel);
         timerLevel.setText(convertMlsSecondsToString(timeRemaining));
 

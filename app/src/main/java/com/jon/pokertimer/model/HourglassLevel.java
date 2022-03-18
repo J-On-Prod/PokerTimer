@@ -1,7 +1,11 @@
 package com.jon.pokertimer.model;
 
+import android.util.Log;
+
 import com.ankushgrover.hourglass.Hourglass;
 import com.jon.pokertimer.activities.InGameActivity;
+
+import java.time.LocalDate;
 
 public class HourglassLevel extends Hourglass {
 
@@ -10,6 +14,7 @@ public class HourglassLevel extends Hourglass {
     public HourglassLevel(long timeInMillis, long intervalInMillis, InGameActivity inGameActivity) {
         super(timeInMillis, intervalInMillis);
         this.gameActivity = inGameActivity;
+        gameActivity.updateTimerLevel(timeInMillis);
     }
 
     @Override
@@ -19,6 +24,6 @@ public class HourglassLevel extends Hourglass {
 
     @Override
     public void onTimerFinish() {
-        gameActivity.incrementeLevel();
+        gameActivity.incrementLevel();
     }
 }

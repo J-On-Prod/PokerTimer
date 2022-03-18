@@ -261,6 +261,10 @@ public class Game implements Serializable {
         return durationGame;
     }
 
+    public int getDurationGameLevel(Level level) {
+        return durationGame - level.getDurationIncrement();
+    }
+
     public String getDurationPlayToString() {
         return durationGame.toString();
     }
