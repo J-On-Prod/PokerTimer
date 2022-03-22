@@ -10,16 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jon.pokertimer.R;
 import com.jon.pokertimer.model.Game;
-import com.jon.pokertimer.model.HourglassGlobal;
-import com.jon.pokertimer.model.HourglassLevel;
 import com.jon.pokertimer.model.Level;
+import com.jon.pokertimer.model.TimerInGame;
 
 public class InGameActivity extends AppCompatActivity {
 
-    private Game game;
+    private static final int COUNT_INTERVAL = 1000;
+    private static final int RESOLUTION_PROGRESS_BAR = 500;
 
-    private Integer levelSelect;
-    private Level currentLevel;
+    private Game game;
+    private TimerInGame timerInGame;
 
     private TextView levelValue;
     private TextView smallBlindValue;
@@ -27,17 +27,6 @@ public class InGameActivity extends AppCompatActivity {
     private TextView timerLevel;
     private TextView timerFinish;
     private ProgressBar progressBarLevel;
-    private final int resolutionProgressBar = 255;
-
-    private boolean timerRunning = false;
-
-    // https://github.com/groverankush/Hourglass
-    private HourglassLevel countDownLevel;
-    private HourglassGlobal countDownGlobal;
-
-    private long getSecondsInMilliseconds(int seconds) {
-        return seconds * 100L;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +40,7 @@ public class InGameActivity extends AppCompatActivity {
         createButtonPlayPause();
         createButtonSkipToNextLevel();
 
-        startGame();
+        timerInGame = new TimerInGame(game);
     }
 
     private void createBlindTimerTexts() {
@@ -62,7 +51,8 @@ public class InGameActivity extends AppCompatActivity {
         timerFinish = findViewById(R.id.textTimerFinishEstimate);
 
         progressBarLevel = findViewById(R.id.progressBarLevel);
-        progressBarLevel.setMax(resolutionProgressBar);
+        progressBarLevel.setMax(RESOLUTION_PROGRESS_BAR);
+        progressBarLevel.setIndeterminate(false);
     }
 
     private void getIntentGame() {
@@ -89,62 +79,40 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private void touchPlayPause() {
-        if (timerRunning) {
-            stopTimers();
-        } else {
-            startTimers();
-        }
-    }
-
-    private void startTimers() {
-        long timeDurationLevel = getSecondsInMilliseconds(currentLevel.getDuration());
-        long timeDurationGame = getSecondsInMilliseconds(game.getDurationGame());
-        int countInterval = 1000;
-        countDownLevel = new HourglassLevel(timeDurationLevel, countInterval, this);
-        countDownLevel.startTimer();
-        countDownGlobal = new HourglassGlobal(timeDurationGame, countInterval, this);
-        countDownGlobal.startTimer();
-        timerRunning = true;
-    }
-
-    private void stopTimers() {
-        countDownLevel.stopTimer();
-        countDownGlobal.stopTimer();
-        timerRunning = false;
+        timerInGame.touch();
     }
 
     private void touchChangeLevel() {
-        incrementeLevel();
+        incrementLevel();
     }
 
-    private void startGame() {
-        levelSelect = 0;
+    public void incrementLevel() {
+        game.incrementLevel();
         updateLevel();
-    }
-
-    public void incrementeLevel() {
-        if (levelSelect+1 < game.getLevelList().size()) {
-            levelSelect++;
-        }
-        updateLevel();
-        startTimers();
     }
 
     private void updateLevel() {
 
-        currentLevel = game.getLevel(levelSelect);
-
-        String levelSelectToString = levelSelect.toString();
+        Level currentLevel = game.getCurrentLevel();
+        timerInGame.changeCurrentLevel(currentLevel);
+        String levelSelectToString = String.valueOf(game.getLevelSelect()+1);
         levelValue.setText(levelSelectToString);
         smallBlindValue.setText(currentLevel.getSmallBlindToString());
         bigBlindValue.setText(currentLevel.getBigBlindToString());
+    }
+
+    private String addZero(long duration) {
+        if (duration < 10) {
+            return "0" + duration;
+        }
+        return String.valueOf(duration);
     }
 
     private String convertMlsSecondsToString(long milliseconds) {
         long hours = (milliseconds / 3600000);
         long minutes = (milliseconds / 60000) % 60;
         long seconds = (milliseconds / 1000) % 60;
-        return hours + ":" + minutes + ":" + seconds;
+        return addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
     }
 
     public void updateTimerGlobal(long timeRemaining) {
@@ -152,7 +120,7 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     public void updateTimerLevel(long timeRemaining) {
-        int percentageLevel = (int) ((1 - currentLevel.ratioLeftTime(timeRemaining)) * resolutionProgressBar);
+        int percentageLevel = (int) ((currentLevel.ratioLeftTime(timeRemaining)) * RESOLUTION_PROGRESS_BAR);
         progressBarLevel.setProgress(percentageLevel);
         timerLevel.setText(convertMlsSecondsToString(timeRemaining));
 

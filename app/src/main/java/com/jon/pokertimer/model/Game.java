@@ -15,7 +15,8 @@ public class Game implements Serializable {
     private ArrayList<Token> tokensPerPlayer;
     private ArrayList<Token> tokensCount;
     private ArrayList<Level> levelList;
-    private String name = "New game";
+    private Level currentLevel;
+    private Integer levelSelect = 0;
     private Integer nbPlayer = 4;
     private Integer durationLevel = 10;
     private Integer durationGame = 120;
@@ -26,6 +27,7 @@ public class Game implements Serializable {
     private Integer totalCave = -1;
     private Integer totalValuePerPlayer = -1;
     private Integer totalNbPerPlayer = -1;
+    private String name = "New game";
     private boolean calculateGame = true;
 
     private HashMap<Integer, Integer> tmpTime = new HashMap<Integer, Integer>();
@@ -261,6 +263,10 @@ public class Game implements Serializable {
         return durationGame;
     }
 
+    public int getDurationGameLevel(Level level) {
+        return durationGame - level.getDurationIncrement();
+    }
+
     public String getDurationPlayToString() {
         return durationGame.toString();
     }
@@ -315,5 +321,23 @@ public class Game implements Serializable {
         }
         tmpTime.put(positionLevel, res);
         return res;
+    }
+
+    public Integer getLevelSelect() {
+        return levelSelect;
+    }
+
+    public Level getCurrentLevel() {
+        if (currentLevel == null) {
+            currentLevel = getLevel(levelSelect);
+        }
+        return currentLevel;
+    }
+
+    public void incrementLevel() {
+        if (levelSelect+1 < levelList.size()) {
+            levelSelect++;
+        }
+        currentLevel = getLevel(levelSelect);
     }
 }
