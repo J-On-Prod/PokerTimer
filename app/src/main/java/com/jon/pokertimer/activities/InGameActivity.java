@@ -2,7 +2,6 @@ package com.jon.pokertimer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -11,9 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jon.pokertimer.R;
 import com.jon.pokertimer.model.Game;
-import com.jon.pokertimer.model.HourglassGlobal;
-import com.jon.pokertimer.model.HourglassLevel;
 import com.jon.pokertimer.model.Level;
+import com.jon.pokertimer.model.TimerInGame;
 
 public class InGameActivity extends AppCompatActivity {
 
@@ -21,12 +19,7 @@ public class InGameActivity extends AppCompatActivity {
     private static final int RESOLUTION_PROGRESS_BAR = 500;
 
     private Game game;
-
-    private Integer levelSelect;
-    private Level currentLevel;
-
-    private long timeDurationLevel;
-    private long timeDurationGame;
+    private TimerInGame timerInGame;
 
     private TextView levelValue;
     private TextView smallBlindValue;
@@ -34,16 +27,6 @@ public class InGameActivity extends AppCompatActivity {
     private TextView timerLevel;
     private TextView timerFinish;
     private ProgressBar progressBarLevel;
-
-    private boolean timerRunning = false;
-
-    // https://github.com/groverankush/Hourglass
-    private HourglassLevel countDownLevel;
-    private HourglassGlobal countDownGlobal;
-
-    private long getMinutesInMilliseconds(int minutes) {
-        return minutes * 60000L;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +40,7 @@ public class InGameActivity extends AppCompatActivity {
         createButtonPlayPause();
         createButtonSkipToNextLevel();
 
-        startGame();
+        timerInGame = new TimerInGame(game);
     }
 
     private void createBlindTimerTexts() {
@@ -96,85 +79,23 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private void touchPlayPause() {
-        if (timerRunning) {
-            pauseTimers();
-        } else {
-            resumeTimers();
-        }
-    }
-
-    private void initTimers() {
-        resetTimerLevel();
-        resetTimerGame();
-        startTimers();
-    }
-
-    private void resetTimerLevel() {
-        timeDurationLevel = getMinutesInMilliseconds(currentLevel.getDuration());
-    }
-
-    private void resetTimerGame() {
-        timeDurationGame = getMinutesInMilliseconds(game.getDurationGameLevel(currentLevel));
-    }
-
-    private void startTimers() {
-        setTimerGame(timeDurationGame);
-        setTimerLevel(timeDurationLevel);
-    }
-
-    private void setTimerLevel(long timeDurationLevel) {
-        if (countDownLevel == null) {
-            countDownLevel = new HourglassLevel(timeDurationLevel, COUNT_INTERVAL, this);
-        } else {
-            countDownLevel.setTime(timeDurationLevel);
-        }
-
-    }
-
-    private void setTimerGame(long timeDurationGame) {
-        if (countDownGlobal == null) {
-            countDownGlobal = new HourglassGlobal(timeDurationGame, COUNT_INTERVAL, this);
-        } else {
-            countDownGlobal.setTime(timeDurationGame);
-        }
-    }
-
-    private void resumeTimers() {
-        countDownLevel.resumeTimer();
-        countDownGlobal.resumeTimer();
-        timerRunning = true;
-    }
-
-    private void pauseTimers() {
-        countDownLevel.pauseTimer();
-        countDownGlobal.pauseTimer();
-        timerRunning = false;
+        timerInGame.touch();
     }
 
     private void touchChangeLevel() {
         incrementLevel();
     }
 
-    private void startGame() {
-        levelSelect = 0;
-        updateLevel();
-        initTimers();
-    }
-
     public void incrementLevel() {
-        if (levelSelect+1 < game.getLevelList().size()) {
-            levelSelect++;
-        }
+        game.incrementLevel();
         updateLevel();
-        resetTimerGame();
-        startTimers();
     }
 
     private void updateLevel() {
 
-        currentLevel = game.getLevel(levelSelect);
-
-        String levelSelectToString = String.valueOf(levelSelect+1);
+        Level currentLevel = game.getCurrentLevel();
+        timerInGame.changeCurrentLevel(currentLevel);
+        String levelSelectToString = String.valueOf(game.getLevelSelect()+1);
         levelValue.setText(levelSelectToString);
         smallBlindValue.setText(currentLevel.getSmallBlindToString());
         bigBlindValue.setText(currentLevel.getBigBlindToString());
@@ -200,7 +121,6 @@ public class InGameActivity extends AppCompatActivity {
 
     public void updateTimerLevel(long timeRemaining) {
         int percentageLevel = (int) ((currentLevel.ratioLeftTime(timeRemaining)) * RESOLUTION_PROGRESS_BAR);
-        Log.d("PokerApp", String.valueOf(percentageLevel));
         progressBarLevel.setProgress(percentageLevel);
         timerLevel.setText(convertMlsSecondsToString(timeRemaining));
 
