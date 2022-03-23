@@ -53,23 +53,25 @@
 
     <EditText
         android:id="@+id/editValueToken"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="number"
+        android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerColor" />
 
     <EditText
         android:id="@+id/editNumberTokens"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="number"
+        android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editValueToken" />
 
@@ -87,34 +89,35 @@
         android:id="@+id/backTokenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:text="@string/back"
         app:icon="@drawable/abc_vector_test"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/removeToken"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/validTokenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#4CAF50"
         android:text="@string/apply"
         app:icon="@drawable/ic_baseline_check_24"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/removeToken"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/removeToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#F44336"
         android:text="@string/remove"
         app:icon="@drawable/ic_baseline_clear_24"
-        app:layout_constraintBottom_toBottomOf="@+id/backTokenButton"
-        app:layout_constraintEnd_toStartOf="@+id/validTokenButton"
-        app:layout_constraintStart_toEndOf="@+id/backTokenButton" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

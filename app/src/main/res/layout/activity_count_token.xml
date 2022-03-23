@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foregroundTint="#F44336"
     tools:context=".activities.CountTokenActivity">
 
     <TextView
@@ -25,7 +26,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonBackCountToken"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCountTokenResetAll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,11 +37,23 @@
         android:id="@+id/buttonBackCountToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/back"
         app:icon="@drawable/abc_vector_test"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonCountTokenResetAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#F44336"
+        android:text="@string/reset"
+        app:icon="@android:drawable/stat_notify_sync"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBackCountToken"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -49,17 +62,17 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="@string/total"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonBackCountToken"
         app:layout_constraintEnd_toStartOf="@+id/totalTokenView"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerTokenCount" />
+        app:layout_constraintTop_toTopOf="@+id/buttonBackCountToken" />
 
     <TextView
         android:id="@+id/totalTokenView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:text="0"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerTokenCount" />
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
 </androidx.constraintlayout.widget.ConstraintLayout>

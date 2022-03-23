@@ -13,9 +13,8 @@ import com.jon.pokertimer.model.Game;
 import com.jon.pokertimer.model.Level;
 import com.jon.pokertimer.model.TimerInGame;
 
-public class InGameActivity extends AppCompatActivity {
+public class InGameActivity extends AppCompatActivity implements TimerInGame.UpdateTimer {
 
-    private static final int COUNT_INTERVAL = 1000;
     private static final int RESOLUTION_PROGRESS_BAR = 500;
 
     private Game game;
@@ -40,7 +39,7 @@ public class InGameActivity extends AppCompatActivity {
         createButtonPlayPause();
         createButtonSkipToNextLevel();
 
-        timerInGame = new TimerInGame(game);
+        timerInGame = new TimerInGame(game, this);
     }
 
     private void createBlindTimerTexts() {
@@ -120,10 +119,16 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     public void updateTimerLevel(long timeRemaining) {
-        int percentageLevel = (int) ((currentLevel.ratioLeftTime(timeRemaining)) * RESOLUTION_PROGRESS_BAR);
+        int percentageLevel = (int) ((game.getCurrentLevel().ratioLeftTime(timeRemaining)) * RESOLUTION_PROGRESS_BAR);
         progressBarLevel.setProgress(percentageLevel);
         timerLevel.setText(convertMlsSecondsToString(timeRemaining));
 
+    }
+
+    @Override
+    public void updateTimer(long timeLevel, long timeGame) {
+        updateTimerLevel(timeLevel);
+        updateTimerGlobal(timeGame);
     }
 }
 

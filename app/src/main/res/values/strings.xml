@@ -16,7 +16,7 @@
     <string name="startPause">Start / Pause</string>
     <string name="nbTokenPlayer">Number of tokens per player</string>
     <string name="totalNbToken">Total number of token :</string>
-    <string name="totalValToken">total value of token :</string>
+    <string name="totalValToken">Total value of token :</string>
     <string name="startGame">Start Game</string>
     <string name="levelsSettings">Levels settings</string>
     <string name="settingsBack">Settings</string>
