@@ -1,6 +1,7 @@
 package com.jon.pokertimer.activities;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -11,21 +12,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jon.pokertimer.R;
 import com.jon.pokertimer.model.Game;
 import com.jon.pokertimer.model.Level;
-import com.jon.pokertimer.model.TimerInGame;
 
-public class InGameActivity extends AppCompatActivity implements TimerInGame.UpdateTimer {
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class InGameActivity extends AppCompatActivity {
 
     private static final int RESOLUTION_PROGRESS_BAR = 500;
 
     private Game game;
-    private TimerInGame timerInGame;
 
     private TextView levelValue;
     private TextView smallBlindValue;
     private TextView bigBlindValue;
     private TextView timerLevel;
     private TextView timerFinish;
+    private Button playPauseButton;
     private ProgressBar progressBarLevel;
+
+    private Timer timer;
+    private MediaPlayer bip = MediaPlayer.create(this, R.raw.bip);
+
+    private boolean initTimer = true;
+    private boolean pauseTimer = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +47,6 @@ public class InGameActivity extends AppCompatActivity implements TimerInGame.Upd
         createButtonCountToken();
         createButtonPlayPause();
         createButtonSkipToNextLevel();
-
-        timerInGame = new TimerInGame(game, this);
     }
 
     private void createBlindTimerTexts() {
@@ -48,6 +55,8 @@ public class InGameActivity extends AppCompatActivity implements TimerInGame.Upd
         bigBlindValue = findViewById(R.id.textCurrentBB);
         timerLevel = findViewById(R.id.textTimerLevel);
         timerFinish = findViewById(R.id.textTimerFinishEstimate);
+
+        playPauseButton = findViewById(R.id.buttonStartPause);
 
         progressBarLevel = findViewById(R.id.progressBarLevel);
         progressBarLevel.setMax(RESOLUTION_PROGRESS_BAR);
@@ -78,7 +87,13 @@ public class InGameActivity extends AppCompatActivity implements TimerInGame.Upd
     }
 
     private void touchPlayPause() {
-        timerInGame.touch();
+        if (initTimer) {
+            this.initTimer = false;
+            this.pauseTimer = false;
+            this.startTimer();
+        } else {
+            this.pauseTimer = !pauseTimer;
+        }
     }
 
     private void touchChangeLevel() {
@@ -91,13 +106,14 @@ public class InGameActivity extends AppCompatActivity implements TimerInGame.Upd
     }
 
     private void updateLevel() {
-
         Level currentLevel = game.getCurrentLevel();
-        timerInGame.changeCurrentLevel(currentLevel);
         String levelSelectToString = String.valueOf(game.getLevelSelect()+1);
+        game.resetDurationGame();
         levelValue.setText(levelSelectToString);
         smallBlindValue.setText(currentLevel.getSmallBlindToString());
         bigBlindValue.setText(currentLevel.getBigBlindToString());
+        updateTimerGlobal(game.getLeftTimeLevel());
+        updateTimerGlobal(game.getLeftTimeGame());
     }
 
     private String addZero(long duration) {
@@ -107,28 +123,51 @@ public class InGameActivity extends AppCompatActivity implements TimerInGame.Upd
         return String.valueOf(duration);
     }
 
-    private String convertMlsSecondsToString(long milliseconds) {
-        long hours = (milliseconds / 3600000);
-        long minutes = (milliseconds / 60000) % 60;
-        long seconds = (milliseconds / 1000) % 60;
-        return addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
+    private String convertSecondsToString(long seconds) {
+        long hours = (seconds / 3600);
+        long minutes = (seconds / 60) % 60;
+        long secondsConv = seconds % 60;
+        return addZero(hours) + ":" + addZero(minutes) + ":" + addZero(secondsConv);
     }
 
     public void updateTimerGlobal(long timeRemaining) {
-        timerFinish.setText(convertMlsSecondsToString(timeRemaining));
+        timerFinish.setText(convertSecondsToString(timeRemaining));
     }
 
     public void updateTimerLevel(long timeRemaining) {
         int percentageLevel = (int) ((game.getCurrentLevel().ratioLeftTime(timeRemaining)) * RESOLUTION_PROGRESS_BAR);
         progressBarLevel.setProgress(percentageLevel);
-        timerLevel.setText(convertMlsSecondsToString(timeRemaining));
-
+        timerLevel.setText(convertSecondsToString(timeRemaining));
     }
 
-    @Override
-    public void updateTimer(long timeLevel, long timeGame) {
-        updateTimerLevel(timeLevel);
-        updateTimerGlobal(timeGame);
+    private boolean currentLevelIsFinish() {
+        return (game.getLeftTimeLevel()) < 0;
+    }
+
+    private void playBip() {
+        bip.start();
+    }
+
+    public void startTimer() {
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(() -> {
+                    if (!pauseTimer) {
+                        if (currentLevelIsFinish()) {
+                            incrementLevel();
+                            playBip();
+                        }
+                        game.incrementDurationGame();
+                        updateTimerLevel(game.getLeftTimeLevel());
+                        updateTimerGlobal(game.getLeftTimeGame());
+                    }
+                });
+            }
+        };
+        timer.scheduleAtFixedRate(timerTask, 0, 1000);
+        game.getCurrentLevel();
     }
 }
 

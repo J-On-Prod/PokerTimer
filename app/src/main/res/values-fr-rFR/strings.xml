@@ -36,4 +36,15 @@
     <string name="pause">Pause</string>
     <string name="tokenValue">Valeur du jeton</string>
     <string name="total">Total</string>
+    <string name="handRanking">Classement des mains</string>
+    <string name="straightFlush">Quinte Flush</string>
+    <string name="flushRoyal">Quinte Flush Royal</string>
+    <string name="fourOfKind">Carré</string>
+    <string name="fullHouse">Full</string>
+    <string name="flush">Couleur</string>
+    <string name="straight">Suite</string>
+    <string name="threeOfKind">Brelan</string>
+    <string name="twoPair">Double paire</string>
+    <string name="pair">pair</string>
+    <string name="highCard">Carte Haute</string>
 </resources>

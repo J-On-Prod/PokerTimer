@@ -5,9 +5,12 @@ import static java.lang.Math.round;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Game implements Serializable {
 
@@ -15,7 +18,9 @@ public class Game implements Serializable {
     private ArrayList<Token> tokensPerPlayer;
     private ArrayList<Token> tokensCount;
     private ArrayList<Level> levelList;
+
     private Level currentLevel;
+
     private Integer levelSelect = 0;
     private Integer nbPlayer = 4;
     private Integer durationLevel = 10;
@@ -27,7 +32,11 @@ public class Game implements Serializable {
     private Integer totalCave = -1;
     private Integer totalValuePerPlayer = -1;
     private Integer totalNbPerPlayer = -1;
+
+    private long timeDurationLevel = 0;
+
     private String name = "New game";
+
     private boolean calculateGame = true;
 
     private HashMap<Integer, Integer> tmpTime = new HashMap<Integer, Integer>();
@@ -311,18 +320,6 @@ public class Game implements Serializable {
         this.calculateGame = calculateGame;
     }
 
-    public int getTimeLeftGame(int positionLevel) {
-        if (tmpTime.containsKey(positionLevel)) {
-            return tmpTime.get(positionLevel);
-        }
-        int res = 0;
-        for (int i = positionLevel; i < levelList.size(); i++) {
-            res += levelList.get(i).getDuration();
-        }
-        tmpTime.put(positionLevel, res);
-        return res;
-    }
-
     public Integer getLevelSelect() {
         return levelSelect;
     }
@@ -339,5 +336,25 @@ public class Game implements Serializable {
             levelSelect++;
         }
         currentLevel = getLevel(levelSelect);
+        resetDurationGame();
     }
+
+    public void resetDurationGame() {
+        timeDurationLevel = 0;
+    }
+
+    public void incrementDurationGame() {
+        timeDurationLevel++;
+    }
+
+    public long getLeftTimeLevel() {
+        return (currentLevel.getDuration() * 60) - timeDurationLevel;
+    }
+
+    public long getLeftTimeGame() {
+        return ((durationGame * 60) - (currentLevel.getDurationIncrement() * 60)) - timeDurationLevel;
+    }
+
 }
+
+

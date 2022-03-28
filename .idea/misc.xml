@@ -3,15 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/drawable/card.xml" value="0.318" />
+        <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/drawable/circle.xml" value="0.318" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.3735" />
+        <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.318" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/activity_change_token.xml" value="0.40896739130434784" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/activity_count_token.xml" value="0.5" />
+        <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/activity_hand_ranking.xml" value="0.3151041666666667" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/activity_in_game.xml" value="0.33" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/activity_prepare_game.xml" value="0.3729166666666667" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/activity_setup_level.xml" value="0.3729166666666667" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/activity_setup_option.xml" value="0.3729166666666667" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/activity_setup_token.xml" value="0.36864931846344484" />
+        <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/card_item.xml" value="0.9" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/color_token_item.xml" value="0.3729166666666667" />
+        <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/hand_rankin_item.xml" value="0.5489583333333333" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/level_item.xml" value="0.3729166666666667" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/token_count_item.xml" value="0.46776729559748426" />
         <entry key="..\:/Users/Jon/AndroidStudioProjects/PokerTimer/app/src/main/res/layout/token_item.xml" value="0.75" />

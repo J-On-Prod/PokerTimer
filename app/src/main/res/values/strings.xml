@@ -40,4 +40,15 @@
     <string name="addFive" translatable="false">+ 5</string>
     <string name="addTen" translatable="false">+ 10</string>
     <string name="reset" translatable="false">Reset</string>
+    <string name="handRanking">Hand Ranking</string>
+    <string name="flushRoyal">Flush Royal</string>
+    <string name="straightFlush">Straight Flush</string>
+    <string name="fourOfKind">Four of a Kind</string>
+    <string name="fullHouse">Full House</string>
+    <string name="flush">Flush</string>
+    <string name="straight">Straight</string>
+    <string name="threeOfKind">Three Of a Kind</string>
+    <string name="twoPair">Two Pair</string>
+    <string name="pair">Pair</string>
+    <string name="highCard">High Card</string>
 </resources>
