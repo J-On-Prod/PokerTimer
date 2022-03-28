@@ -47,4 +47,5 @@
     <string name="twoPair">Double paire</string>
     <string name="pair">pair</string>
     <string name="highCard">Carte Haute</string>
+    <string name="buttonCards">Cartes</string>
 </resources>

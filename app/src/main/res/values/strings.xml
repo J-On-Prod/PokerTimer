@@ -51,4 +51,5 @@
     <string name="twoPair">Two Pair</string>
     <string name="pair">Pair</string>
     <string name="highCard">High Card</string>
+    <string name="buttonCards">Cards Rank</string>
 </resources>

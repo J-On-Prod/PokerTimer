@@ -31,7 +31,7 @@ public class InGameActivity extends AppCompatActivity {
     private ProgressBar progressBarLevel;
 
     private Timer timer;
-    private MediaPlayer bip = MediaPlayer.create(this, R.raw.bip);
+    private MediaPlayer bip;
 
     private boolean initTimer = true;
     private boolean pauseTimer = true;
@@ -47,6 +47,8 @@ public class InGameActivity extends AppCompatActivity {
         createButtonCountToken();
         createButtonPlayPause();
         createButtonSkipToNextLevel();
+        createButtonCardRank();
+        this.bip = MediaPlayer.create(this, R.raw.bip);
     }
 
     private void createBlindTimerTexts() {
@@ -86,6 +88,15 @@ public class InGameActivity extends AppCompatActivity {
         nextButton.setOnClickListener(v -> touchChangeLevel());
     }
 
+    private void createButtonCardRank() {
+        Button cardRankButton = findViewById(R.id.buttonCardRank);
+        cardRankButton.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), HandRankingActivity.class);
+            intent.putExtra("Game", game);
+            startActivity(intent);
+        });
+    }
+
     private void touchPlayPause() {
         if (initTimer) {
             this.initTimer = false;
@@ -98,6 +109,10 @@ public class InGameActivity extends AppCompatActivity {
 
     private void touchChangeLevel() {
         incrementLevel();
+    }
+
+    private void touchCardsRank() {
+
     }
 
     public void incrementLevel() {
