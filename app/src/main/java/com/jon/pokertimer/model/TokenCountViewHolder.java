@@ -1,5 +1,7 @@
 package com.jon.pokertimer.model;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,15 +15,16 @@ import com.jon.pokertimer.R;
 public class TokenCountViewHolder extends RecyclerView.ViewHolder {
 
     Token token;
+    NotifyCountTextChange notifyCountTextChange;
 
     View colorSquare;
     TextView colorText;
     TextView valueText;
     EditText countText;
 
-    TokenCountAdapter.OnTokenCountListener onTokenCountListener;
-    public TokenCountViewHolder(@NonNull View itemView, TokenCountAdapter.OnTokenCountListener onTokenCountListener) {
+    public TokenCountViewHolder(@NonNull View itemView, NotifyCountTextChange notifyCountTextChange) {
         super(itemView);
+        this.notifyCountTextChange = notifyCountTextChange;
     }
 
     private void createAllButtons() {
@@ -40,6 +43,22 @@ public class TokenCountViewHolder extends RecyclerView.ViewHolder {
         colorText = this.itemView.findViewById(R.id.colorToken2);
         valueText = this.itemView.findViewById(R.id.tokenCountVal);
         countText = this.itemView.findViewById(R.id.tokenCountNumber);
+        countText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                notifyCountTextChange.notifyCountChange();
+            }
+        });
     }
 
     public void display(Token token) {
@@ -50,5 +69,9 @@ public class TokenCountViewHolder extends RecyclerView.ViewHolder {
         colorText.setText(token.getColor().getName());
         valueText.setText(token.getValueToString());
         countText.setText(token.getNumberToString());
+    }
+
+    public interface NotifyCountTextChange {
+        public void notifyCountChange();
     }
 }

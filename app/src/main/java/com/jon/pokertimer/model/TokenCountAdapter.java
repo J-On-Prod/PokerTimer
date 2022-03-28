@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jon.pokertimer.R;
-import com.jon.pokertimer.activities.CountTokenActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +15,11 @@ import java.util.List;
 public class TokenCountAdapter extends RecyclerView.Adapter<TokenCountViewHolder> {
 
     private List<Token> tokenList;
-    private CountTokenActivity countTokenActivity;
-    private OnTokenCountListener onTokenCountClick;
+    private TokenCountViewHolder.NotifyCountTextChange notifyCountTextChange;
 
-    public TokenCountAdapter(ArrayList<Token> tokensCount, CountTokenActivity countTokenActivity) {
+    public TokenCountAdapter(ArrayList<Token> tokensCount, TokenCountViewHolder.NotifyCountTextChange notifyCountTextChange) {
         this.tokenList = tokensCount;
-        this.countTokenActivity = countTokenActivity;
+        this.notifyCountTextChange = notifyCountTextChange;
     }
 
     @NonNull
@@ -29,7 +27,7 @@ public class TokenCountAdapter extends RecyclerView.Adapter<TokenCountViewHolder
     public TokenCountViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.token_count_item, parent, false);
-        return new TokenCountViewHolder(view, this.onTokenCountClick);
+        return new TokenCountViewHolder(view, notifyCountTextChange);
     }
 
     @Override
@@ -42,7 +40,4 @@ public class TokenCountAdapter extends RecyclerView.Adapter<TokenCountViewHolder
         return this.tokenList.size();
     }
 
-    public interface OnTokenCountListener {
-        void onTokenCountClick(int position);
-    }
 }

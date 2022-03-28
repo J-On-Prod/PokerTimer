@@ -3,6 +3,7 @@ package com.jon.pokertimer.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,12 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jon.pokertimer.R;
 import com.jon.pokertimer.model.Game;
+import com.jon.pokertimer.model.Token;
 import com.jon.pokertimer.model.TokenAdapter;
 import com.jon.pokertimer.model.TokenCountAdapter;
+import com.jon.pokertimer.model.TokenCountViewHolder;
 
-public class CountTokenActivity extends AppCompatActivity implements TokenCountAdapter.OnTokenCountListener {
+public class CountTokenActivity extends AppCompatActivity implements TokenCountViewHolder.NotifyCountTextChange {
 
     private Game game;
+
+    TextView countText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,7 @@ public class CountTokenActivity extends AppCompatActivity implements TokenCountA
 
         createRecyclerView();
         createButtonBack();
+        this.countText = findViewById(R.id.totalTokenView);
     }
 
     private void createRecyclerView() {
@@ -50,7 +56,11 @@ public class CountTokenActivity extends AppCompatActivity implements TokenCountA
     }
 
     @Override
-    public void onTokenCountClick(int position) {
-
+    public void notifyCountChange() {
+        int valTotal = 0;
+        for (Token token : game.getTokensCount()) {
+            valTotal += token.getTotalValue();
+        }
+        countText.setText(String.valueOf(valTotal));
     }
 }
