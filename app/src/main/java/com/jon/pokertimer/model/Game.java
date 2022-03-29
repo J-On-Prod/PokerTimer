@@ -2,15 +2,11 @@ package com.jon.pokertimer.model;
 
 import static java.lang.Math.round;
 
-import android.util.Log;
-
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Game implements Serializable {
 
@@ -20,6 +16,8 @@ public class Game implements Serializable {
     private ArrayList<Level> levelList;
 
     private Level currentLevel;
+
+    private Date lastChangeScreen;
 
     private Integer levelSelect = 0;
     private Integer nbPlayer = 4;
@@ -38,6 +36,8 @@ public class Game implements Serializable {
     private String name = "New game";
 
     private boolean calculateGame = true;
+    private boolean initTimer = false;
+    private boolean pauseTimer = true;
 
     private HashMap<Integer, Integer> tmpTime = new HashMap<Integer, Integer>();
 
@@ -121,7 +121,7 @@ public class Game implements Serializable {
     /* TOKEN COUNT */
 
     public void generateTokenCount() {
-        resetTokenCount();
+        tokensCount = new ArrayList<>();
         for (Token token : this.tokenList) {
             tokensCount.add(new Token(token.getValue(), 0, token.getColor()));
         }
@@ -132,7 +132,9 @@ public class Game implements Serializable {
     }
 
     public void resetTokenCount() {
-        tokensCount = new ArrayList<>();
+        for (Token token : this.tokensCount) {
+            token.setNumber(0);
+        }
     }
 
     public void addTokenNumber(int position, int number) {
@@ -353,6 +355,42 @@ public class Game implements Serializable {
 
     public long getLeftTimeGame() {
         return ((durationGame * 60) - (currentLevel.getDurationIncrement() * 60)) - timeDurationLevel;
+    }
+
+    public boolean isInitTimer() {
+        return this.initTimer;
+    }
+
+    public boolean isPauseTimer() {
+        return pauseTimer;
+    }
+
+    public void changePlayPauseState() {
+        this.pauseTimer = !pauseTimer;
+    }
+
+    public void startGameTimer() {
+        this.initTimer = true;
+        this.pauseTimer = false;
+    }
+
+    public void setLastChangeScreen() {
+        lastChangeScreen = new Date();
+    }
+
+    public void setTimeDurationInOpen() {
+        if (!pauseTimer && lastChangeScreen != null) {
+            long secondsInOtherScreen = ((new Date().getTime()) - lastChangeScreen.getTime()) / 1000;
+            long accumulateDuration = secondsInOtherScreen + timeDurationLevel;
+            while (accumulateDuration > currentLevel.getDurationInSeconds() ) {
+                if ((currentLevel.getDurationInSeconds() - accumulateDuration) < 0) {
+                    accumulateDuration -= currentLevel.getDurationInSeconds();
+                    incrementLevel();
+                }
+            }
+            timeDurationLevel = currentLevel.getDuration() - accumulateDuration;
+        }
+
     }
 
 }

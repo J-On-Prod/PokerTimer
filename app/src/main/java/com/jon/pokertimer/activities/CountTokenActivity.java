@@ -1,7 +1,9 @@
 package com.jon.pokertimer.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,8 +21,10 @@ import com.jon.pokertimer.model.TokenCountViewHolder;
 public class CountTokenActivity extends AppCompatActivity implements TokenCountViewHolder.NotifyCountTextChange {
 
     private Game game;
+    private TokenCountAdapter tokenCountAdapter;
 
     TextView countText;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +34,29 @@ public class CountTokenActivity extends AppCompatActivity implements TokenCountV
         getIntentGame();
 
         createRecyclerView();
+        createButtonReset();
         createButtonBack();
         this.countText = findViewById(R.id.totalTokenView);
     }
 
     private void createRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.recyclerTokenCount);
-        TokenCountAdapter tokenCountAdapter = new TokenCountAdapter(game.getTokensCount(), this);
+        tokenCountAdapter = new TokenCountAdapter(game.getTokensCount(), this);
+        recyclerView = findViewById(R.id.recyclerTokenCount);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(tokenCountAdapter);
+    }
+
+    private void createButtonReset() {
+        Button buttonReset = findViewById(R.id.buttonCountTokenResetAll);
+        buttonReset.setOnClickListener(view -> resetAllNumberTokens());
+        buttonReset.setClickable(false);
+        buttonReset.setVisibility(View.GONE);
+    }
+
+    private void resetAllNumberTokens() {
+        game.resetTokenCount();
+        tokenCountAdapter.notifyItemRangeChanged(0, this.game.getTokensCount().size()-1);
+        countText.setText('0');
     }
 
     private void createButtonBack() {

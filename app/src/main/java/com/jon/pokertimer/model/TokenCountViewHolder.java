@@ -29,13 +29,23 @@ public class TokenCountViewHolder extends RecyclerView.ViewHolder {
 
     private void createAllButtons() {
         Button addOne = itemView.findViewById(R.id.buttonAdd1);
-        addOne.setOnClickListener(view -> token.addNumber(1));
+        addOne.setOnClickListener(view -> addTokens(1));
         Button addFive = itemView.findViewById(R.id.buttonAdd5);
-        addFive.setOnClickListener(view -> token.addNumber(5));
+        addFive.setOnClickListener(view -> addTokens(5));
         Button addTen = itemView.findViewById(R.id.buttonAdd10);
-        addTen.setOnClickListener(view -> token.addNumber(10));
+        addTen.setOnClickListener(view -> addTokens(10));
         Button resetButton = itemView.findViewById(R.id.buttonResetToken);
-        resetButton.setOnClickListener(view -> token.setNumber(0));
+        resetButton.setOnClickListener(view -> setTokens(0));
+    }
+
+    private void addTokens(int nbToken) {
+        String currentVal = countText.getText().toString();
+        setTokens(Integer.parseInt(currentVal) + nbToken);
+    }
+
+    private void setTokens(int nbToken) {
+        countText.setText(String.valueOf(nbToken));
+        token.setNumber(nbToken);
     }
 
     private void setAllText() {
@@ -56,6 +66,8 @@ public class TokenCountViewHolder extends RecyclerView.ViewHolder {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                int currentNb = Integer.parseInt(editable.toString());
+                token.setNumber(currentNb);
                 notifyCountTextChange.notifyCountChange();
             }
         });
