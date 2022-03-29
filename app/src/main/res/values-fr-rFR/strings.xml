@@ -45,7 +45,7 @@
     <string name="straight">Suite</string>
     <string name="threeOfKind">Brelan</string>
     <string name="twoPair">Double paire</string>
-    <string name="pair">pair</string>
+    <string name="pair">Paire</string>
     <string name="highCard">Carte Haute</string>
     <string name="buttonCards">Cartes</string>
 </resources>

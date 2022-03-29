@@ -44,6 +44,10 @@ public class Level implements Serializable {
         return duration;
     }
 
+    public Integer getDurationInSeconds() {
+        return duration * 60;
+    }
+
     public String getDurationToString() {
         return duration.toString();
     }

@@ -33,9 +33,6 @@ public class InGameActivity extends AppCompatActivity {
     private Timer timer;
     private MediaPlayer bip;
 
-    private boolean initTimer = true;
-    private boolean pauseTimer = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +46,10 @@ public class InGameActivity extends AppCompatActivity {
         createButtonSkipToNextLevel();
         createButtonCardRank();
         this.bip = MediaPlayer.create(this, R.raw.bip);
+        if (game.isInitTimer() && !game.isPauseTimer()) {
+            game.setTimeDurationInOpen();
+            this.startTimer();
+        }
     }
 
     private void createBlindTimerTexts() {
@@ -63,6 +64,8 @@ public class InGameActivity extends AppCompatActivity {
         progressBarLevel = findViewById(R.id.progressBarLevel);
         progressBarLevel.setMax(RESOLUTION_PROGRESS_BAR);
         progressBarLevel.setIndeterminate(false);
+
+        updateScreenLevel();
     }
 
     private void getIntentGame() {
@@ -72,6 +75,7 @@ public class InGameActivity extends AppCompatActivity {
     private void createButtonCountToken() {
         Button playPauseButton = findViewById(R.id.buttonCountToken);
         playPauseButton.setOnClickListener(v -> {
+            game.setLastChangeScreen();
             Intent intent = new Intent(getApplicationContext(), CountTokenActivity.class);
             intent.putExtra("Game", game);
             startActivity(intent);
@@ -91,6 +95,7 @@ public class InGameActivity extends AppCompatActivity {
     private void createButtonCardRank() {
         Button cardRankButton = findViewById(R.id.buttonCardRank);
         cardRankButton.setOnClickListener(view -> {
+            game.setLastChangeScreen();
             Intent intent = new Intent(getApplicationContext(), HandRankingActivity.class);
             intent.putExtra("Game", game);
             startActivity(intent);
@@ -98,12 +103,11 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private void touchPlayPause() {
-        if (initTimer) {
-            this.initTimer = false;
-            this.pauseTimer = false;
+        if (!game.isInitTimer()) {
+            game.startGameTimer();
             this.startTimer();
         } else {
-            this.pauseTimer = !pauseTimer;
+            game.changePlayPauseState();
         }
     }
 
@@ -121,9 +125,13 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private void updateLevel() {
+        game.resetDurationGame();
+        updateScreenLevel();
+    }
+
+    private void updateScreenLevel() {
         Level currentLevel = game.getCurrentLevel();
         String levelSelectToString = String.valueOf(game.getLevelSelect()+1);
-        game.resetDurationGame();
         levelValue.setText(levelSelectToString);
         smallBlindValue.setText(currentLevel.getSmallBlindToString());
         bigBlindValue.setText(currentLevel.getBigBlindToString());
@@ -169,7 +177,7 @@ public class InGameActivity extends AppCompatActivity {
             @Override
             public void run() {
                 runOnUiThread(() -> {
-                    if (!pauseTimer) {
+                    if (!game.isPauseTimer()) {
                         if (currentLevelIsFinish()) {
                             incrementLevel();
                             playBip();

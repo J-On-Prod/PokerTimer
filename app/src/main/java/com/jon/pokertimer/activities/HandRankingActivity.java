@@ -19,6 +19,8 @@ import java.util.List;
 
 public class HandRankingActivity extends AppCompatActivity {
 
+    //Tips: https://static.winamax.fr/img/content/team/antiseche-debutant.jpg
+
     Game game;
     ArrayList<HandRankin> handRankinList = new ArrayList<HandRankin>();
     RecyclerView recyclerView;
