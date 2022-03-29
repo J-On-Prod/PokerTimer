@@ -3,6 +3,7 @@ package com.jon.pokertimer.activities;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,8 +47,10 @@ public class InGameActivity extends AppCompatActivity {
         createButtonSkipToNextLevel();
         createButtonCardRank();
         this.bip = MediaPlayer.create(this, R.raw.bip);
-        if (game.isInitTimer() && !game.isPauseTimer()) {
+        if (!game.isPauseTimer()) {
             game.setTimeDurationInOpen();
+        }
+        if (game.isInitTimer()) {
             this.startTimer();
         }
     }
@@ -135,7 +138,7 @@ public class InGameActivity extends AppCompatActivity {
         levelValue.setText(levelSelectToString);
         smallBlindValue.setText(currentLevel.getSmallBlindToString());
         bigBlindValue.setText(currentLevel.getBigBlindToString());
-        updateTimerGlobal(game.getLeftTimeLevel());
+        updateTimerLevel(game.getLeftTimeLevel());
         updateTimerGlobal(game.getLeftTimeGame());
     }
 

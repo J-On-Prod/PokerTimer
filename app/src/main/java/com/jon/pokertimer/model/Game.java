@@ -2,6 +2,8 @@ package com.jon.pokertimer.model;
 
 import static java.lang.Math.round;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -383,14 +385,11 @@ public class Game implements Serializable {
             long secondsInOtherScreen = ((new Date().getTime()) - lastChangeScreen.getTime()) / 1000;
             long accumulateDuration = secondsInOtherScreen + timeDurationLevel;
             while (accumulateDuration > currentLevel.getDurationInSeconds() ) {
-                if ((currentLevel.getDurationInSeconds() - accumulateDuration) < 0) {
-                    accumulateDuration -= currentLevel.getDurationInSeconds();
-                    incrementLevel();
-                }
+                accumulateDuration -= currentLevel.getDurationInSeconds();
+                incrementLevel();
             }
-            timeDurationLevel = currentLevel.getDuration() - accumulateDuration;
+            timeDurationLevel = accumulateDuration;
         }
-
     }
 
 }
