@@ -16,6 +16,7 @@ import com.jon.pokertimer.model.HandRankinAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HandRankingActivity extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public class HandRankingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_hand_ranking);
 
         getIntentGame();

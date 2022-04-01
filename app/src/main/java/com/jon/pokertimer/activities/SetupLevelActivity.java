@@ -12,6 +12,8 @@ import com.jon.pokertimer.R;
 import com.jon.pokertimer.model.Game;
 import com.jon.pokertimer.model.LevelAdapter;
 
+import java.util.Objects;
+
 public class SetupLevelActivity extends AppCompatActivity {
 
     private Game game;
@@ -21,6 +23,7 @@ public class SetupLevelActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_setup_level);
 
         getIntentData();

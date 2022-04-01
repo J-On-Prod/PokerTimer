@@ -15,6 +15,8 @@ import com.jon.pokertimer.model.Game;
 import com.jon.pokertimer.model.TokenAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Objects;
+
 public class SetupTokenActivity extends AppCompatActivity implements TokenAdapter.OnTokenListener {
 
     Game game;
@@ -23,6 +25,7 @@ public class SetupTokenActivity extends AppCompatActivity implements TokenAdapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_setup_token);
 
         if (!gameIntentExist()) {

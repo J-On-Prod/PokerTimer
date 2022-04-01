@@ -13,6 +13,8 @@ import com.jon.pokertimer.R;
 import com.jon.pokertimer.model.Game;
 import com.jon.pokertimer.model.TokenAdapter;
 
+import java.util.Objects;
+
 public class PrepareGameActivity extends AppCompatActivity implements TokenAdapter.OnTokenListener {
 
     private Game game;
@@ -20,6 +22,7 @@ public class PrepareGameActivity extends AppCompatActivity implements TokenAdapt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_prepare_game);
 
         getIntentGame();

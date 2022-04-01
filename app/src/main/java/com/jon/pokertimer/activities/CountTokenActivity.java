@@ -18,6 +18,8 @@ import com.jon.pokertimer.model.TokenAdapter;
 import com.jon.pokertimer.model.TokenCountAdapter;
 import com.jon.pokertimer.model.TokenCountViewHolder;
 
+import java.util.Objects;
+
 public class CountTokenActivity extends AppCompatActivity implements TokenCountViewHolder.NotifyCountTextChange {
 
     private Game game;
@@ -29,6 +31,7 @@ public class CountTokenActivity extends AppCompatActivity implements TokenCountV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_count_token);
 
         getIntentGame();

@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jon.pokertimer.R;
 import com.jon.pokertimer.model.Game;
 
+import java.util.Objects;
+
 public class SetupOptionActivity extends AppCompatActivity {
 
     Game game;
@@ -25,6 +27,7 @@ public class SetupOptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_setup_option);
 
         getIntentData();

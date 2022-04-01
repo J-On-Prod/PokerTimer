@@ -14,6 +14,7 @@ import com.jon.pokertimer.R;
 import com.jon.pokertimer.model.Game;
 import com.jon.pokertimer.model.Level;
 
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,6 +38,7 @@ public class InGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_in_game);
 
         getIntentGame();
@@ -150,6 +152,9 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     private String convertSecondsToString(long seconds) {
+        if (seconds < 0) {
+            return "00:00:00";
+        }
         long hours = (seconds / 3600);
         long minutes = (seconds / 60) % 60;
         long secondsConv = seconds % 60;

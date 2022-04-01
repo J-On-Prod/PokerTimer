@@ -17,6 +17,7 @@ import com.jon.pokertimer.model.Game;
 import com.jon.pokertimer.model.Token;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ChangeTokenActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -34,6 +35,7 @@ public class ChangeTokenActivity extends AppCompatActivity implements AdapterVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_change_token);
 
         getIntentData();
