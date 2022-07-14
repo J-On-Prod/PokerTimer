@@ -28,6 +28,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/duration"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -39,6 +40,7 @@
                     android:layout_marginStart="8dp"
                     android:text="00:00"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textLabelDuration"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -50,6 +52,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="@string/totalDuration"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/textIncDuration"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +63,7 @@
                     android:layout_height="wrap_content"
                     android:text="00:00"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -84,6 +88,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/smallBlindChrono"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -95,6 +100,7 @@
                     android:layout_marginStart="8dp"
                     android:text="0"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textSmallBlind"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -105,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/pause"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textSmallBlind"
@@ -117,6 +124,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="@string/bigBlindChrono"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/bigBlind"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -127,6 +135,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

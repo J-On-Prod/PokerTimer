@@ -25,10 +25,12 @@
         android:indeterminateOnly="false"
         android:max="500"
         android:progress="125"
+        android:progressDrawable="@drawable/circle"
         android:rotation="90"
         android:scaleX="-1"
-        android:progressDrawable="@drawable/circle"
+        android:scaleY="1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -97,11 +99,13 @@
         <TextView
             android:id="@+id/textCurrentLevelVal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:text="0"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintStart_toEndOf="@+id/textCurrentLevelLabel" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textCurrentLevelLabel"
+            app:layout_constraintTop_toTopOf="@+id/textCurrentLevelLabel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

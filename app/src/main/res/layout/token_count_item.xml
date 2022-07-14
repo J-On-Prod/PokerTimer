@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/color"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,6 +39,7 @@
             android:layout_marginStart="8dp"
             android:text="Rouge"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/colorTokenView2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@string/tokenValue"
+            android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@+id/tokenCountVal"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -71,7 +75,9 @@
             android:id="@+id/buttonAdd1"
             android:layout_width="60dp"
             android:layout_height="40dp"
+            android:ellipsize="end"
             android:text="@string/addOne"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -82,6 +88,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:text="@string/addFive"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonAdd1"
             app:layout_constraintTop_toTopOf="parent" />
@@ -92,6 +99,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:text="@string/addTen"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonAdd5"
             app:layout_constraintTop_toTopOf="parent" />
@@ -103,6 +111,7 @@
             android:ems="10"
             android:inputType="number"
             android:textAlignment="textEnd"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,6 +123,7 @@
         android:layout_height="40dp"
         android:backgroundTint="#F44336"
         android:text="@string/reset"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
