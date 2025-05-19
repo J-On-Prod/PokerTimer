@@ -11,8 +11,8 @@ public class Card {
     public static final String COLOR_DIAMOND = "♦";
 
 
-    private String rank;
-    private String color;
+    private final String rank;
+    private final String color;
 
     public Card(String rank, String color) {
         this.rank = rank;

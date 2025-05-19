@@ -10,10 +10,10 @@ import com.jon.pokertimer.R;
 
 public class TokenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    private TextView valueToken;
-    private TextView numberToken;
-    private TextView colorToken;
-    private View colorTokenView;
+    private final TextView valueToken;
+    private final TextView numberToken;
+    private final TextView colorToken;
+    private final View colorTokenView;
     TokenAdapter.OnTokenListener onTokenListener;
 
     public TokenViewHolder(@NonNull View itemView, TokenAdapter.OnTokenListener onTokenListener) {

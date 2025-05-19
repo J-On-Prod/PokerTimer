@@ -13,8 +13,8 @@ import java.util.List;
 
 public class ColorTokenAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<ColorToken> colorList;
+    private final Context context;
+    private final List<ColorToken> colorList;
 
     public ColorTokenAdapter(Context context, List<ColorToken> colorList) {
         this.context = context;

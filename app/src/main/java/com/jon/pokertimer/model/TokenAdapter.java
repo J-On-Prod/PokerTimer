@@ -14,7 +14,7 @@ import java.util.List;
 public class TokenAdapter extends RecyclerView.Adapter<TokenViewHolder> {
 
     List<Token> tokens;
-    private OnTokenListener onTokenListener;
+    private final OnTokenListener onTokenListener;
 
     public TokenAdapter(List<Token> tokens, OnTokenListener onTokenListener) {
         this.tokens = tokens;

@@ -12,35 +12,21 @@ public class HandRankinViewHolder extends RecyclerView.ViewHolder {
 
     HandRankin handRankin;
 
-    private TextView titleHandRankin;
-
-    private TextView nameHandRankin_1;
-    private TextView nameHandRankin_2;
-    private TextView nameHandRankin_3;
-    private TextView nameHandRankin_4;
-    private TextView nameHandRankin_5;
-
-    private TextView colorHandRankin_1;
-    private TextView colorHandRankin_2;
-    private TextView colorHandRankin_3;
-    private TextView colorHandRankin_4;
-    private TextView colorHandRankin_5;
-
     public HandRankinViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 
     private void initTitle() {
-        titleHandRankin = itemView.findViewById(R.id.handRankinView);
+        TextView titleHandRankin = itemView.findViewById(R.id.handRankinView);
         titleHandRankin.setText(handRankin.getName());
     }
 
     private void initRank() {
-        nameHandRankin_1 = itemView.findViewById(R.id.cardHighView1);
-        nameHandRankin_2 = itemView.findViewById(R.id.cardHighView2);
-        nameHandRankin_3 = itemView.findViewById(R.id.cardHighView3);
-        nameHandRankin_4 = itemView.findViewById(R.id.cardHighView4);
-        nameHandRankin_5 = itemView.findViewById(R.id.cardHighView5);
+        TextView nameHandRankin_1 = itemView.findViewById(R.id.cardHighView1);
+        TextView nameHandRankin_2 = itemView.findViewById(R.id.cardHighView2);
+        TextView nameHandRankin_3 = itemView.findViewById(R.id.cardHighView3);
+        TextView nameHandRankin_4 = itemView.findViewById(R.id.cardHighView4);
+        TextView nameHandRankin_5 = itemView.findViewById(R.id.cardHighView5);
 
         nameHandRankin_1.setText(handRankin.getCard(0).getRank());
         nameHandRankin_2.setText(handRankin.getCard(1).getRank());
@@ -56,11 +42,11 @@ public class HandRankinViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void initColor() {
-        colorHandRankin_1 = itemView.findViewById(R.id.cardColorView1);
-        colorHandRankin_2 = itemView.findViewById(R.id.cardColorView2);
-        colorHandRankin_3 = itemView.findViewById(R.id.cardColorView3);
-        colorHandRankin_4 = itemView.findViewById(R.id.cardColorView4);
-        colorHandRankin_5 = itemView.findViewById(R.id.cardColorView5);
+        TextView colorHandRankin_1 = itemView.findViewById(R.id.cardColorView1);
+        TextView colorHandRankin_2 = itemView.findViewById(R.id.cardColorView2);
+        TextView colorHandRankin_3 = itemView.findViewById(R.id.cardColorView3);
+        TextView colorHandRankin_4 = itemView.findViewById(R.id.cardColorView4);
+        TextView colorHandRankin_5 = itemView.findViewById(R.id.cardColorView5);
 
         colorHandRankin_1.setText(handRankin.getCard(0).getColor());
         colorHandRankin_2.setText(handRankin.getCard(1).getColor());

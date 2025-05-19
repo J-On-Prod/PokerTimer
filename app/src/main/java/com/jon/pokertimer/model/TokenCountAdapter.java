@@ -14,8 +14,8 @@ import java.util.List;
 
 public class TokenCountAdapter extends RecyclerView.Adapter<TokenCountViewHolder> {
 
-    private List<Token> tokenList;
-    private TokenCountViewHolder.NotifyCountTextChange notifyCountTextChange;
+    private final List<Token> tokenList;
+    private final TokenCountViewHolder.NotifyCountTextChange notifyCountTextChange;
 
     public TokenCountAdapter(ArrayList<Token> tokensCount, TokenCountViewHolder.NotifyCountTextChange notifyCountTextChange) {
         this.tokenList = tokensCount;
